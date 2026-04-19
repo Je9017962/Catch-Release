@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-  <title>Catch & Release</title>
+  <title>Catch &amp; Release</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <!-- ══════════════════════════════════════════
-       SCREEN 1: HOME / SPLASH
+       SCREEN 1: SPLASH / HOME
   ══════════════════════════════════════════ -->
   <div id="screen-home" class="screen active">
     <div class="home-top">
@@ -25,7 +25,7 @@
     <div class="home-actions">
       <button class="btn-blue" onclick="showScreen('screen-login')">Login</button>
       <button class="btn-blue" onclick="showScreen('screen-signup')">Sign up</button>
-      <p class="forgot-link" onclick="showScreen('screen-reset')">Forget Password?</p>
+      <p class="forgot-link" onclick="showScreen('screen-reset')">Forgot Password?</p>
     </div>
   </div>
 
@@ -34,15 +34,30 @@
   ══════════════════════════════════════════ -->
   <div id="screen-signup" class="screen">
     <div class="form-header">
+      <button class="form-back-btn" onclick="showScreen('screen-home')">←</button>
       <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
     </div>
     <div class="form-body">
-      <input class="text-input" type="text"     placeholder="Name" />
-      <input class="text-input" type="email"    placeholder="Email" />
-      <input class="text-input" type="password" placeholder="Password" />
-      <input class="text-input" type="password" placeholder="Confirm Password" />
-      <button class="btn-blue" onclick="showScreen('screen-onboarding')">Create an Account</button>
-      <p class="form-link" onclick="showScreen('screen-login')">Already Have an Account?</p>
+      <p class="form-section-title">CREATE ACCOUNT</p>
+      <div class="input-group">
+        <label class="input-label">Full Name</label>
+        <input class="text-input" id="signup-name"     type="text"     placeholder="Your name" autocomplete="name" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">Email Address</label>
+        <input class="text-input" id="signup-email"    type="email"    placeholder="you@email.com" autocomplete="email" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">Password</label>
+        <input class="text-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">Confirm Password</label>
+        <input class="text-input" id="signup-confirm"  type="password" placeholder="Repeat password" autocomplete="new-password" />
+      </div>
+      <p class="form-error hidden" id="signup-error"></p>
+      <button class="btn-blue" onclick="doSignup()">Create Account</button>
+      <p class="form-link" onclick="showScreen('screen-login')">Already have an account? <strong>Log in</strong></p>
     </div>
   </div>
 
@@ -51,14 +66,23 @@
   ══════════════════════════════════════════ -->
   <div id="screen-login" class="screen">
     <div class="form-header">
+      <button class="form-back-btn" onclick="showScreen('screen-home')">←</button>
       <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
     </div>
     <div class="form-body">
-      <input class="text-input" type="email"    placeholder="Email" />
-      <input class="text-input" type="password" placeholder="Password" />
-      <button class="btn-blue" onclick="showScreen('screen-main')">Login</button>
-      <p class="form-link" onclick="showScreen('screen-signup')">Already Have an Account?</p>
-      <p class="form-link small" onclick="showScreen('screen-reset')">Forgot Password?</p>
+      <p class="form-section-title">WELCOME BACK</p>
+      <div class="input-group">
+        <label class="input-label">Email Address</label>
+        <input class="text-input" id="login-email"    type="email"    placeholder="you@email.com" autocomplete="email" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">Password</label>
+        <input class="text-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password" />
+      </div>
+      <p class="form-error hidden" id="login-error"></p>
+      <button class="btn-blue" onclick="doLogin()">Log In</button>
+      <p class="form-link" onclick="showScreen('screen-signup')">No account? <strong>Sign up</strong></p>
+      <p class="form-link small" onclick="showScreen('screen-reset')">Forgot password?</p>
     </div>
   </div>
 
@@ -67,18 +91,33 @@
   ══════════════════════════════════════════ -->
   <div id="screen-reset" class="screen">
     <div class="form-header">
-      <h1 class="app-title-sm">CATCH &<br>RELEASE</h1>
+      <button class="form-back-btn" onclick="showScreen('screen-login')">←</button>
+      <h1 class="app-title-sm">RESET<br>PASSWORD</h1>
     </div>
     <div class="form-body">
-      <input class="text-input" type="email"    placeholder="Email" />
-      <input class="text-input" type="password" placeholder="New Password" />
-      <input class="text-input" type="password" placeholder="Confirm New Password" />
-      <button class="btn-blue" onclick="showScreen('screen-login')">Continue to Login</button>
+      <p class="form-section-title">RESET PASSWORD</p>
+      <p class="form-hint">Enter your registered email and a new password.</p>
+      <div class="input-group">
+        <label class="input-label">Email Address</label>
+        <input class="text-input" id="reset-email"    type="email"    placeholder="you@email.com" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">New Password</label>
+        <input class="text-input" id="reset-pass1"    type="password" placeholder="New password" />
+      </div>
+      <div class="input-group">
+        <label class="input-label">Confirm New Password</label>
+        <input class="text-input" id="reset-pass2"    type="password" placeholder="Repeat new password" />
+      </div>
+      <p class="form-error hidden" id="reset-error"></p>
+      <p class="form-success hidden" id="reset-success">✓ Password updated! You can now log in.</p>
+      <button class="btn-blue" onclick="doReset()">Update Password</button>
     </div>
   </div>
 
   <!-- ══════════════════════════════════════════
        SCREEN 5: SAFETY & ONBOARDING
+       (shown only once, on first login)
   ══════════════════════════════════════════ -->
   <div id="screen-onboarding" class="screen screen-white">
     <div class="onboard-header">
@@ -87,16 +126,16 @@
     <div class="onboard-scroll">
       <h3 class="how-title">HOW TO FISH</h3>
       <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">FLICK TO CAST</p><p class="how-sub">Swipe quickly to cast your line</p></div></div>
-      <div class="how-step"><div class="how-icon">📱</div><div><p class="how-bold">LIFT TO REEL</p><p class="how-sub">Raise your phone after you feel a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">ACCESSORY HOOK</p><p class="how-sub">Earn achievements as you fish and explore your local waters.</p></div></div>
+      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
+      <div class="how-step"><div class="how-icon">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
+      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
       <div class="safety-block">
         <p class="safety-title">⚠️ SAFETY FIRST!</p>
-        <p class="safety-body">Always be aware of your physical surroundings and fishing near the water's edge at all times.</p>
+        <p class="safety-body">Always be aware of your physical surroundings when fishing near the water's edge.</p>
         <p class="safety-sub">STAY IN A SAFE LOCATION TO START FISHING</p>
       </div>
     </div>
-    <button class="btn-blue btn-full" onclick="showScreen('screen-main')">LET'S FISH!</button>
+    <button class="btn-blue btn-full" onclick="completeOnboarding()">LET'S FISH!</button>
   </div>
 
   <!-- ══════════════════════════════════════════
@@ -104,23 +143,21 @@
   ══════════════════════════════════════════ -->
   <div id="screen-main" class="screen screen-white">
     <div class="topbar">
-      <div class="weather-pill">
-        <span>🌤️</span>
+      <div class="weather-pill" id="weather-pill">
+        <span id="weather-icon">🌤️</span>
         <div>
-          <div class="w-date">Thursday, March 5th</div>
-          <div class="w-temp">70°F · Cloudy</div>
+          <div class="w-date" id="weather-date">Loading…</div>
+          <div class="w-temp" id="weather-temp">Fetching weather…</div>
         </div>
       </div>
+      <button class="logout-btn" onclick="doLogout()" title="Log out">⏏</button>
     </div>
-    <div class="map-wrap" id="map-wrap">
-      <!-- Illustrated map of Lake Eola area -->
+    <div class="map-wrap">
       <div class="map-scene">
         <div class="map-sky"></div>
         <div class="map-buildings">
-          <div class="building b1"></div>
-          <div class="building b2"></div>
-          <div class="building b3"></div>
-          <div class="building b4"></div>
+          <div class="building b1"></div><div class="building b2"></div>
+          <div class="building b3"></div><div class="building b4"></div>
         </div>
         <div class="map-grass"></div>
         <div class="map-lake">
@@ -135,7 +172,7 @@
     </div>
     <nav class="bottom-nav">
       <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
-      <button class="nav-btn active" onclick="showScreen('screen-main')">HOME</button>
+      <button class="nav-btn active">HOME</button>
       <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
     </nav>
   </div>
@@ -150,9 +187,9 @@
     </div>
     <div class="onboard-scroll">
       <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">FLICK TO CAST</p><p class="how-sub">Swipe quickly to cast your line</p></div></div>
-      <div class="how-step"><div class="how-icon">📱</div><div><p class="how-bold">LIFT TO REEL</p><p class="how-sub">Raise your phone after you feel a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">ACCESSORY HOOK</p><p class="how-sub">Earn achievements as you fish and explore your local waters.</p></div></div>
+      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
+      <div class="how-step"><div class="how-icon">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
+      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
     </div>
     <nav class="bottom-nav">
       <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
@@ -162,24 +199,23 @@
   </div>
 
   <!-- ══════════════════════════════════════════
-       SCREEN 8: AR CAMERA — CAST / REEL
+       SCREEN 8: AR CAMERA
   ══════════════════════════════════════════ -->
   <div id="screen-ar" class="screen">
     <video id="ar-video" autoplay playsinline muted></video>
     <canvas id="ar-canvas"></canvas>
 
     <div class="ar-topbar-overlay">
-      <div class="weather-pill light">
-        <span>🌤️</span>
+      <div class="weather-pill light" id="ar-weather-pill">
+        <span id="ar-weather-icon">🌤️</span>
         <div>
-          <div class="w-date">Thursday, March 5th</div>
-          <div class="w-temp">70°F · Cloudy</div>
+          <div class="w-date" id="ar-weather-date">—</div>
+          <div class="w-temp" id="ar-weather-temp">—</div>
         </div>
       </div>
       <button class="ar-x-btn" onclick="stopAR()">✕</button>
     </div>
 
-    <!-- Cast hint -->
     <div class="ar-instruction" id="ar-inst-cast">
       <div class="inst-chip">
         <span class="inst-arrow">👆</span>
@@ -187,7 +223,6 @@
       </div>
     </div>
 
-    <!-- Waiting hint (shown after cast, before bite) -->
     <div class="ar-instruction hidden" id="ar-inst-reel">
       <div class="inst-chip">
         <span class="inst-arrow">⏳</span>
@@ -195,19 +230,17 @@
       </div>
     </div>
 
-    <!-- Bite alert banner -->
     <div class="bite-banner hidden" id="bite-banner">🐟 GOT ONE — TAP REEL!</div>
 
-    <!-- ★ BIG REEL BUTTON — appears only when there's a bite ★ -->
     <button class="reel-btn hidden" id="reel-btn" onclick="doReel()">
       <span class="reel-icon">🎣</span>
       <span class="reel-label">REEL!</span>
     </button>
 
     <nav class="bottom-nav ar-bottom-nav">
-      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn" onclick="stopAR(); showScreen('screen-profile')">PROFILE</button>
       <button class="nav-btn" onclick="stopAR()">HOME</button>
-      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
+      <button class="nav-btn" onclick="stopAR(); showScreen('screen-help')">HELP</button>
     </nav>
   </div>
 
@@ -219,7 +252,6 @@
     <div class="catch-overlay">
       <div class="catch-card">
         <h2 class="catch-headline">YOU CAUGHT<br>A FISH!</h2>
-        <!-- Real fish photo -->
         <div class="caught-fish-photo-wrap">
           <img id="caught-fish-img" src="" alt="fish" class="caught-fish-photo" />
         </div>
@@ -242,7 +274,7 @@
   <div id="screen-fish-detail" class="screen screen-white">
     <div class="fish-detail-topbar">
       <button class="back-arrow" onclick="showScreen('screen-catch')">←</button>
-      <div class="restricted-badge" id="detail-badge">THE RESTRICTED SPECIES</div>
+      <div class="restricted-badge" id="detail-badge">KEYSTONE SPECIES</div>
     </div>
     <div class="fish-detail-scroll">
       <div class="fish-detail-photo-wrap">
@@ -250,10 +282,10 @@
       </div>
       <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
       <div class="fish-info-block">
-        <p><span class="info-label">Scientific Name:</span> <span id="d-sci" class="info-val-blue"></span></p>
-        <p><span class="info-label">Average Size:</span> <span id="d-size"></span></p>
-        <p><span class="info-label">Found in Florida:</span> <span id="d-location"></span></p>
-        <p><span class="info-label">Conservation Status:</span> <span id="d-conservation"></span></p>
+        <p><span class="info-label">Scientific Name: </span><span id="d-sci" class="info-val-blue"></span></p>
+        <p><span class="info-label">Average Size: </span><span id="d-size"></span></p>
+        <p><span class="info-label">Found in Florida: </span><span id="d-location"></span></p>
+        <p><span class="info-label">Conservation Status: </span><span id="d-conservation"></span></p>
         <p id="d-desc" class="detail-para"></p>
         <div class="why-box">
           <p class="why-title">🌊 Why We Release</p>
@@ -262,7 +294,7 @@
       </div>
     </div>
     <nav class="bottom-nav">
-      <button class="nav-btn active" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
       <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
       <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
     </nav>
@@ -274,11 +306,12 @@
   <div id="screen-profile" class="screen screen-white">
     <div class="profile-top">
       <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
-      <div class="angler-rank-badge">BEGINNER ANGLER</div>
+      <p class="profile-username" id="profile-username"></p>
+      <div class="angler-rank-badge" id="angler-rank">BEGINNER ANGLER</div>
       <div class="xp-track">
-        <div class="xp-fill" id="xp-fill" style="width:25%"></div>
+        <div class="xp-fill" id="xp-fill" style="width:0%"></div>
       </div>
-      <p class="xp-text"><span id="xp-cur">25</span> / 100 XP</p>
+      <p class="xp-text"><span id="xp-cur">0</span> / 100 XP</p>
     </div>
     <div class="log-list" id="log-list">
       <p class="log-empty">No catches yet — go fish! 🎣</p>
@@ -290,7 +323,10 @@
     </nav>
   </div>
 
+  <!-- Load order matters: data → auth → ar → game -->
   <script src="fish-data.js"></script>
+  <script src="auth.js"></script>
+  <script src="weather.js"></script>
   <script src="ar-scene.js"></script>
   <script src="game.js"></script>
 </body>
