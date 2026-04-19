@@ -1,333 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
+  <meta name="theme-color" content="#1E6EE8"/>
   <title>Catch &amp; Release</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════
-       SCREEN 1: SPLASH / HOME
-  ══════════════════════════════════════════ -->
-  <div id="screen-home" class="screen active">
-    <div class="home-top">
-      <h1 class="app-title">CATCH AND<br>RELEASE</h1>
+<!-- ═══════════════════════════ SCREEN 1: SPLASH ═══════════════════════════ -->
+<div id="screen-home" class="screen active" role="main" aria-label="Catch and Release home screen">
+  <div class="home-top">
+    <h1 class="app-title">CATCH AND<br>RELEASE</h1>
+  </div>
+  <div class="home-fish-area" aria-hidden="true">
+    <div class="fish-circle">
+      <span class="fish-emoji-lg">🐠</span>
+      <span class="fish-label-sm">(fish)</span>
     </div>
-    <div class="home-fish-area">
-      <div class="fish-circle">
-        <span class="fish-emoji-lg">🐠</span>
-        <span class="fish-label-sm">(fish)</span>
+  </div>
+  <div class="home-actions">
+    <button class="btn-blue" onclick="showScreen('screen-login')" aria-label="Log in to your account">Login</button>
+    <button class="btn-blue" onclick="showScreen('screen-signup')" aria-label="Create a new account">Sign up</button>
+    <p class="forgot-link" onclick="showScreen('screen-reset')" role="button" tabindex="0" aria-label="Reset your password">Forgot Password?</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 2: SIGN UP ════════════════════════════ -->
+<div id="screen-signup" class="screen" role="main" aria-label="Create account">
+  <div class="form-header">
+    <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
+    <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
+  </div>
+  <div class="form-body">
+    <p class="form-section-title">CREATE ACCOUNT</p>
+    <div class="input-group">
+      <label class="input-label" for="signup-name">Full Name</label>
+      <input class="text-input" id="signup-name" type="text" placeholder="Your name" autocomplete="name" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signup-email">Email Address</label>
+      <input class="text-input" id="signup-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signup-password">Password</label>
+      <input class="text-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="signup-confirm">Confirm Password</label>
+      <input class="text-input" id="signup-confirm" type="password" placeholder="Repeat password" autocomplete="new-password" aria-required="true"/>
+    </div>
+    <p class="form-error hidden" id="signup-error" role="alert" aria-live="assertive"></p>
+    <button class="btn-blue" id="signup-btn" onclick="doSignup()" aria-label="Create account">Create Account</button>
+    <p class="form-link" onclick="showScreen('screen-login')" role="button" tabindex="0">Already have an account? <strong>Log in</strong></p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 3: LOGIN ══════════════════════════════ -->
+<div id="screen-login" class="screen" role="main" aria-label="Log in">
+  <div class="form-header">
+    <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
+    <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
+  </div>
+  <div class="form-body">
+    <p class="form-section-title">WELCOME BACK</p>
+    <div class="input-group">
+      <label class="input-label" for="login-email">Email Address</label>
+      <input class="text-input" id="login-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="login-password">Password</label>
+      <input class="text-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password" aria-required="true"/>
+    </div>
+    <p class="form-error hidden" id="login-error" role="alert" aria-live="assertive"></p>
+    <button class="btn-blue" id="login-btn" onclick="doLogin()" aria-label="Log in">Log In</button>
+    <p class="form-link" onclick="showScreen('screen-signup')" role="button" tabindex="0">No account? <strong>Sign up</strong></p>
+    <p class="form-link small" onclick="showScreen('screen-reset')" role="button" tabindex="0">Forgot password?</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 4: RESET PASSWORD ═════════════════════ -->
+<div id="screen-reset" class="screen" role="main" aria-label="Reset password">
+  <div class="form-header">
+    <button class="form-back-btn" onclick="showScreen('screen-login')" aria-label="Back to login">←</button>
+    <h1 class="app-title-sm">RESET<br>PASSWORD</h1>
+  </div>
+  <div class="form-body">
+    <p class="form-section-title">RESET PASSWORD</p>
+    <p class="form-hint">Enter your registered email and choose a new password.</p>
+    <div class="input-group">
+      <label class="input-label" for="reset-email">Email Address</label>
+      <input class="text-input" id="reset-email" type="email" placeholder="you@email.com" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="reset-pass1">New Password</label>
+      <input class="text-input" id="reset-pass1" type="password" placeholder="New password" aria-required="true"/>
+    </div>
+    <div class="input-group">
+      <label class="input-label" for="reset-pass2">Confirm New Password</label>
+      <input class="text-input" id="reset-pass2" type="password" placeholder="Repeat new password" aria-required="true"/>
+    </div>
+    <p class="form-error hidden" id="reset-error" role="alert" aria-live="assertive"></p>
+    <p class="form-success hidden" id="reset-success" role="status" aria-live="polite"></p>
+    <button class="btn-blue" id="reset-btn" onclick="doReset()" aria-label="Update password">Update Password</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 5: ONBOARDING ════════════════════════ -->
+<div id="screen-onboarding" class="screen screen-white" role="main" aria-label="How to fish — onboarding">
+  <div class="onboard-header">
+    <h2 class="blue-title">CATCH AND RELEASE</h2>
+  </div>
+  <div class="onboard-scroll">
+    <h3 class="how-title">HOW TO FISH</h3>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
+    <div class="safety-block" role="note" aria-label="Safety warning">
+      <p class="safety-title">⚠️ SAFETY FIRST!</p>
+      <p class="safety-body">Always be aware of your physical surroundings when near the water's edge.</p>
+      <p class="safety-sub">STAY IN A SAFE LOCATION TO START FISHING</p>
+    </div>
+  </div>
+  <button class="btn-blue btn-full" onclick="completeOnboarding()" aria-label="Start fishing">LET'S FISH!</button>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 6: HOME / MAP ════════════════════════ -->
+<div id="screen-main" class="screen screen-white" role="main" aria-label="Home map — Lake Eola">
+  <div class="topbar">
+    <div class="weather-pill" id="weather-pill" aria-live="polite" aria-label="Current weather">
+      <span id="weather-icon" aria-hidden="true">🌤️</span>
+      <div>
+        <div class="w-date" id="weather-date">Loading…</div>
+        <div class="w-temp" id="weather-temp">Fetching weather…</div>
       </div>
     </div>
-    <div class="home-actions">
-      <button class="btn-blue" onclick="showScreen('screen-login')">Login</button>
-      <button class="btn-blue" onclick="showScreen('screen-signup')">Sign up</button>
-      <p class="forgot-link" onclick="showScreen('screen-reset')">Forgot Password?</p>
+    <button class="logout-btn" onclick="doLogout()" aria-label="Log out">⏏</button>
+  </div>
+  <div class="map-wrap" role="img" aria-label="Illustrated map of Lake Eola, Orlando">
+    <div class="map-scene">
+      <div class="map-sky"></div>
+      <div class="map-buildings" aria-hidden="true">
+        <div class="building b1"></div><div class="building b2"></div>
+        <div class="building b3"></div><div class="building b4"></div>
+      </div>
+      <div class="map-grass"></div>
+      <div class="map-lake">
+        <span class="lake-label">Lake Eola</span>
+        <div class="map-fountain" aria-hidden="true">⛲</div>
+      </div>
+      <button class="map-pin-spot" onclick="showARcast()" aria-label="Start fishing at Lake Eola">
+        <div class="pin-pulse" aria-hidden="true"></div>
+        <div class="pin-dot" aria-hidden="true">🎣</div>
+      </button>
+    </div>
+  </div>
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn" id="nav-profile-main" onclick="goTo('screen-profile')" aria-label="View profile">PROFILE</button>
+    <button class="nav-btn active" id="nav-home-main" aria-label="Home" aria-current="page">HOME</button>
+    <button class="nav-btn" id="nav-help-main" onclick="goTo('screen-help')" aria-label="Help">HELP</button>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 7: HELP ══════════════════════════════ -->
+<div id="screen-help" class="screen screen-white" role="main" aria-label="Help — how to fish">
+  <div class="inner-topbar">
+    <button class="back-arrow" onclick="goTo('screen-main')" aria-label="Back to home">←</button>
+    <h2 class="blue-title">HOW TO FISH</h2>
+  </div>
+  <div class="onboard-scroll">
+    <div class="how-step"><div class="how-icon" aria-hidden="true">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
+    <div class="how-step"><div class="how-icon" aria-hidden="true">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
+  </div>
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn" onclick="goTo('screen-profile')" aria-label="View profile">PROFILE</button>
+    <button class="nav-btn" onclick="goTo('screen-main')" aria-label="Home">HOME</button>
+    <button class="nav-btn active" aria-label="Help" aria-current="page">HELP</button>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 8: AR CAMERA ═════════════════════════ -->
+<div id="screen-ar" class="screen" role="main" aria-label="AR fishing camera">
+  <video id="ar-video" autoplay playsinline muted aria-hidden="true"></video>
+  <canvas id="ar-canvas" aria-hidden="true"></canvas>
+
+  <div class="ar-topbar-overlay" aria-live="polite">
+    <div class="weather-pill light" aria-label="Current weather">
+      <span id="ar-weather-icon" aria-hidden="true">🌤️</span>
+      <div>
+        <div class="w-date" id="ar-weather-date">—</div>
+        <div class="w-temp" id="ar-weather-temp">—</div>
+      </div>
+    </div>
+    <button class="ar-x-btn" onclick="stopAR()" aria-label="Close camera and return to map">✕</button>
+  </div>
+
+  <div class="ar-instruction" id="ar-inst-cast" role="status" aria-live="polite">
+    <div class="inst-chip">
+      <span class="inst-arrow" aria-hidden="true">👆</span>
+      <div><strong>TAP ANYWHERE TO CAST</strong><br><span>Tap the water to cast your line</span></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       SCREEN 2: SIGN UP
-  ══════════════════════════════════════════ -->
-  <div id="screen-signup" class="screen">
-    <div class="form-header">
-      <button class="form-back-btn" onclick="showScreen('screen-home')">←</button>
-      <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
-    </div>
-    <div class="form-body">
-      <p class="form-section-title">CREATE ACCOUNT</p>
-      <div class="input-group">
-        <label class="input-label">Full Name</label>
-        <input class="text-input" id="signup-name"     type="text"     placeholder="Your name" autocomplete="name" />
-      </div>
-      <div class="input-group">
-        <label class="input-label">Email Address</label>
-        <input class="text-input" id="signup-email"    type="email"    placeholder="you@email.com" autocomplete="email" />
-      </div>
-      <div class="input-group">
-        <label class="input-label">Password</label>
-        <input class="text-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" />
-      </div>
-      <div class="input-group">
-        <label class="input-label">Confirm Password</label>
-        <input class="text-input" id="signup-confirm"  type="password" placeholder="Repeat password" autocomplete="new-password" />
-      </div>
-      <p class="form-error hidden" id="signup-error"></p>
-      <button class="btn-blue" onclick="doSignup()">Create Account</button>
-      <p class="form-link" onclick="showScreen('screen-login')">Already have an account? <strong>Log in</strong></p>
+  <div class="ar-instruction hidden" id="ar-inst-reel" role="status" aria-live="polite">
+    <div class="inst-chip">
+      <span class="inst-arrow" aria-hidden="true">⏳</span>
+      <div><strong>WAITING FOR A BITE…</strong><br><span>Watch the bobber — tap REEL when it dips!</span></div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════
-       SCREEN 3: LOGIN
-  ══════════════════════════════════════════ -->
-  <div id="screen-login" class="screen">
-    <div class="form-header">
-      <button class="form-back-btn" onclick="showScreen('screen-home')">←</button>
-      <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
-    </div>
-    <div class="form-body">
-      <p class="form-section-title">WELCOME BACK</p>
-      <div class="input-group">
-        <label class="input-label">Email Address</label>
-        <input class="text-input" id="login-email"    type="email"    placeholder="you@email.com" autocomplete="email" />
+  <div class="bite-banner hidden" id="bite-banner" role="alert" aria-live="assertive">🐟 GOT ONE — TAP REEL!</div>
+
+  <button class="reel-btn hidden" id="reel-btn" onclick="doReel()" aria-label="Reel in the fish now!">
+    <span class="reel-icon" aria-hidden="true">🎣</span>
+    <span class="reel-label">REEL!</span>
+  </button>
+
+  <nav class="bottom-nav ar-bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn" onclick="stopAR(); goTo('screen-profile')" aria-label="View profile">PROFILE</button>
+    <button class="nav-btn" onclick="stopAR()" aria-label="Home">HOME</button>
+    <button class="nav-btn" onclick="stopAR(); goTo('screen-help')" aria-label="Help">HELP</button>
+  </nav>
+</div>
+
+<!-- ═══════════════════════════ SCREEN 9: CATCH CARD ════════════════════════ -->
+<div id="screen-catch" class="screen" role="main" aria-label="You caught a fish!">
+  <canvas id="catch-bg-canvas" aria-hidden="true"></canvas>
+  <div class="catch-overlay">
+    <div class="catch-card" role="dialog" aria-modal="true" aria-labelledby="catch-headline">
+      <h2 class="catch-headline" id="catch-headline">YOU CAUGHT<br>A FISH!</h2>
+      <div class="caught-fish-photo-wrap">
+        <img id="caught-fish-img" src="" alt="" class="caught-fish-photo"/>
       </div>
-      <div class="input-group">
-        <label class="input-label">Password</label>
-        <input class="text-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password" />
+      <div id="catch-badge" class="catch-xp-badge">KEYSTONE SPECIES</div>
+      <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
+      <div class="catch-xp-row"><span id="catch-xp-text">+100 XP</span> ★★★★★</div>
+      <p class="catch-fun-fact" id="catch-fun-fact" aria-live="polite"></p>
+      <div class="catch-action-row">
+        <button class="btn-blue" onclick="openFishDetail()" aria-label="Learn more about this fish">LEARN MORE</button>
+        <button class="btn-outline-blue" onclick="releaseFish()" aria-label="Release the fish back into the water">RELEASE 🌊</button>
       </div>
-      <p class="form-error hidden" id="login-error"></p>
-      <button class="btn-blue" onclick="doLogin()">Log In</button>
-      <p class="form-link" onclick="showScreen('screen-signup')">No account? <strong>Sign up</strong></p>
-      <p class="form-link small" onclick="showScreen('screen-reset')">Forgot password?</p>
+      <button class="btn-keep-small" onclick="keepFish()" aria-label="Keep the fish">Keep Fish</button>
     </div>
   </div>
+</div>
 
-  <!-- ══════════════════════════════════════════
-       SCREEN 4: RESET PASSWORD
-  ══════════════════════════════════════════ -->
-  <div id="screen-reset" class="screen">
-    <div class="form-header">
-      <button class="form-back-btn" onclick="showScreen('screen-login')">←</button>
-      <h1 class="app-title-sm">RESET<br>PASSWORD</h1>
-    </div>
-    <div class="form-body">
-      <p class="form-section-title">RESET PASSWORD</p>
-      <p class="form-hint">Enter your registered email and a new password.</p>
-      <div class="input-group">
-        <label class="input-label">Email Address</label>
-        <input class="text-input" id="reset-email"    type="email"    placeholder="you@email.com" />
-      </div>
-      <div class="input-group">
-        <label class="input-label">New Password</label>
-        <input class="text-input" id="reset-pass1"    type="password" placeholder="New password" />
-      </div>
-      <div class="input-group">
-        <label class="input-label">Confirm New Password</label>
-        <input class="text-input" id="reset-pass2"    type="password" placeholder="Repeat new password" />
-      </div>
-      <p class="form-error hidden" id="reset-error"></p>
-      <p class="form-success hidden" id="reset-success">✓ Password updated! You can now log in.</p>
-      <button class="btn-blue" onclick="doReset()">Update Password</button>
-    </div>
+<!-- ═══════════════════════════ SCREEN 10: FISH DETAIL ══════════════════════ -->
+<div id="screen-fish-detail" class="screen screen-white" role="main" aria-label="Fish information">
+  <div class="fish-detail-topbar">
+    <button class="back-arrow" id="fish-detail-back" onclick="showScreen('screen-catch')" aria-label="Back">←</button>
+    <div class="restricted-badge" id="detail-badge" aria-label="Fish conservation status">KEYSTONE SPECIES</div>
   </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 5: SAFETY & ONBOARDING
-       (shown only once, on first login)
-  ══════════════════════════════════════════ -->
-  <div id="screen-onboarding" class="screen screen-white">
-    <div class="onboard-header">
-      <h2 class="blue-title">CATCH AND RELEASE</h2>
+  <div class="fish-detail-scroll">
+    <div class="fish-detail-photo-wrap">
+      <img id="detail-photo-img" src="" alt="" class="fish-detail-photo-img"/>
     </div>
-    <div class="onboard-scroll">
-      <h3 class="how-title">HOW TO FISH</h3>
-      <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
-      <div class="how-step"><div class="how-icon">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
-      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
-      <div class="safety-block">
-        <p class="safety-title">⚠️ SAFETY FIRST!</p>
-        <p class="safety-body">Always be aware of your physical surroundings when fishing near the water's edge.</p>
-        <p class="safety-sub">STAY IN A SAFE LOCATION TO START FISHING</p>
-      </div>
-    </div>
-    <button class="btn-blue btn-full" onclick="completeOnboarding()">LET'S FISH!</button>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 6: MAIN HOME / MAP
-  ══════════════════════════════════════════ -->
-  <div id="screen-main" class="screen screen-white">
-    <div class="topbar">
-      <div class="weather-pill" id="weather-pill">
-        <span id="weather-icon">🌤️</span>
-        <div>
-          <div class="w-date" id="weather-date">Loading…</div>
-          <div class="w-temp" id="weather-temp">Fetching weather…</div>
-        </div>
-      </div>
-      <button class="logout-btn" onclick="doLogout()" title="Log out">⏏</button>
-    </div>
-    <div class="map-wrap">
-      <div class="map-scene">
-        <div class="map-sky"></div>
-        <div class="map-buildings">
-          <div class="building b1"></div><div class="building b2"></div>
-          <div class="building b3"></div><div class="building b4"></div>
-        </div>
-        <div class="map-grass"></div>
-        <div class="map-lake">
-          <span class="lake-label">Lake Eola</span>
-          <div class="map-fountain">⛲</div>
-        </div>
-        <div class="map-pin-spot" onclick="showARcast()">
-          <div class="pin-pulse"></div>
-          <div class="pin-dot">🎣</div>
-        </div>
-      </div>
-    </div>
-    <nav class="bottom-nav">
-      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
-      <button class="nav-btn active">HOME</button>
-      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
-    </nav>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 7: HELP
-  ══════════════════════════════════════════ -->
-  <div id="screen-help" class="screen screen-white">
-    <div class="inner-topbar">
-      <button class="back-arrow" onclick="showScreen('screen-main')">←</button>
-      <h2 class="blue-title">HOW TO FISH</h2>
-    </div>
-    <div class="onboard-scroll">
-      <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
-      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">TAP TO CAST</p><p class="how-sub">Tap anywhere on the AR screen to cast your line</p></div></div>
-      <div class="how-step"><div class="how-icon">🎣</div><div><p class="how-bold">TAP REEL BUTTON</p><p class="how-sub">When the big red REEL button appears, tap it fast!</p></div></div>
-      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">LOG YOUR CATCH</p><p class="how-sub">Learn about each fish and earn XP for releasing them.</p></div></div>
-    </div>
-    <nav class="bottom-nav">
-      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
-      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
-      <button class="nav-btn active">HELP</button>
-    </nav>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 8: AR CAMERA
-  ══════════════════════════════════════════ -->
-  <div id="screen-ar" class="screen">
-    <video id="ar-video" autoplay playsinline muted></video>
-    <canvas id="ar-canvas"></canvas>
-
-    <div class="ar-topbar-overlay">
-      <div class="weather-pill light" id="ar-weather-pill">
-        <span id="ar-weather-icon">🌤️</span>
-        <div>
-          <div class="w-date" id="ar-weather-date">—</div>
-          <div class="w-temp" id="ar-weather-temp">—</div>
-        </div>
-      </div>
-      <button class="ar-x-btn" onclick="stopAR()">✕</button>
-    </div>
-
-    <div class="ar-instruction" id="ar-inst-cast">
-      <div class="inst-chip">
-        <span class="inst-arrow">👆</span>
-        <div><strong>TAP ANYWHERE TO CAST</strong><br><span>Tap the screen to cast your line</span></div>
-      </div>
-    </div>
-
-    <div class="ar-instruction hidden" id="ar-inst-reel">
-      <div class="inst-chip">
-        <span class="inst-arrow">⏳</span>
-        <div><strong>WAITING FOR A BITE…</strong><br><span>Watch the bobber — tap REEL when it dips!</span></div>
-      </div>
-    </div>
-
-    <div class="bite-banner hidden" id="bite-banner">🐟 GOT ONE — TAP REEL!</div>
-
-    <button class="reel-btn hidden" id="reel-btn" onclick="doReel()">
-      <span class="reel-icon">🎣</span>
-      <span class="reel-label">REEL!</span>
-    </button>
-
-    <nav class="bottom-nav ar-bottom-nav">
-      <button class="nav-btn" onclick="stopAR(); showScreen('screen-profile')">PROFILE</button>
-      <button class="nav-btn" onclick="stopAR()">HOME</button>
-      <button class="nav-btn" onclick="stopAR(); showScreen('screen-help')">HELP</button>
-    </nav>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 9: YOU CAUGHT A FISH!
-  ══════════════════════════════════════════ -->
-  <div id="screen-catch" class="screen">
-    <video id="catch-bg" autoplay playsinline muted loop class="catch-bg-video"></video>
-    <div class="catch-overlay">
-      <div class="catch-card">
-        <h2 class="catch-headline">YOU CAUGHT<br>A FISH!</h2>
-        <div class="caught-fish-photo-wrap">
-          <img id="caught-fish-img" src="" alt="fish" class="caught-fish-photo" />
-        </div>
-        <div id="catch-badge" class="catch-xp-badge">KEYSTONE SPECIES</div>
-        <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
-        <div class="catch-xp-row"><span id="catch-xp-text">+100 XP</span> ★★★★★</div>
-        <p class="catch-fun-fact" id="catch-fun-fact"></p>
-        <div class="catch-action-row">
-          <button class="btn-blue" onclick="openFishDetail()">LEARN MORE</button>
-          <button class="btn-outline-blue" onclick="releaseFish()">RELEASE 🌊</button>
-        </div>
-        <button class="btn-keep-small" onclick="keepFish()">Keep Fish</button>
+    <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
+    <div class="fish-info-block">
+      <p><span class="info-label">Scientific Name: </span><span id="d-sci" class="info-val-blue"></span></p>
+      <p><span class="info-label">Average Size: </span><span id="d-size"></span></p>
+      <p><span class="info-label">Found in Florida: </span><span id="d-location"></span></p>
+      <p><span class="info-label">Conservation Status: </span><span id="d-conservation"></span></p>
+      <p id="d-desc" class="detail-para"></p>
+      <div class="why-box">
+        <p class="why-title">🌊 Why We Release</p>
+        <p id="d-why"></p>
       </div>
     </div>
   </div>
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn" onclick="goTo('screen-profile')" aria-label="View profile">PROFILE</button>
+    <button class="nav-btn" onclick="goTo('screen-main')" aria-label="Home">HOME</button>
+    <button class="nav-btn" onclick="goTo('screen-help')" aria-label="Help">HELP</button>
+  </nav>
+</div>
 
-  <!-- ══════════════════════════════════════════
-       SCREEN 10: FISH DETAIL
-  ══════════════════════════════════════════ -->
-  <div id="screen-fish-detail" class="screen screen-white">
-    <div class="fish-detail-topbar">
-      <button class="back-arrow" onclick="showScreen('screen-catch')">←</button>
-      <div class="restricted-badge" id="detail-badge">KEYSTONE SPECIES</div>
+<!-- ═══════════════════════════ SCREEN 11: PROFILE / LOG ════════════════════ -->
+<div id="screen-profile" class="screen screen-white" role="main" aria-label="Fisher profile and catch log">
+  <div class="profile-top">
+    <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
+    <p class="profile-username" id="profile-username"></p>
+    <div class="angler-rank-badge" id="angler-rank" aria-live="polite">BEGINNER ANGLER</div>
+    <div class="xp-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="xp-track">
+      <div class="xp-fill" id="xp-fill" style="width:0%"></div>
     </div>
-    <div class="fish-detail-scroll">
-      <div class="fish-detail-photo-wrap">
-        <img id="detail-photo-img" src="" alt="fish" class="fish-detail-photo-img" />
-      </div>
-      <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
-      <div class="fish-info-block">
-        <p><span class="info-label">Scientific Name: </span><span id="d-sci" class="info-val-blue"></span></p>
-        <p><span class="info-label">Average Size: </span><span id="d-size"></span></p>
-        <p><span class="info-label">Found in Florida: </span><span id="d-location"></span></p>
-        <p><span class="info-label">Conservation Status: </span><span id="d-conservation"></span></p>
-        <p id="d-desc" class="detail-para"></p>
-        <div class="why-box">
-          <p class="why-title">🌊 Why We Release</p>
-          <p id="d-why"></p>
-        </div>
-      </div>
-    </div>
-    <nav class="bottom-nav">
-      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
-      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
-      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
-    </nav>
+    <p class="xp-text"><span id="xp-cur">0</span> XP total · <span id="fish-count">0</span> fish caught</p>
   </div>
-
-  <!-- ══════════════════════════════════════════
-       SCREEN 11: MASTER FISHER LOG (PROFILE)
-  ══════════════════════════════════════════ -->
-  <div id="screen-profile" class="screen screen-white">
-    <div class="profile-top">
-      <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
-      <p class="profile-username" id="profile-username"></p>
-      <div class="angler-rank-badge" id="angler-rank">BEGINNER ANGLER</div>
-      <div class="xp-track">
-        <div class="xp-fill" id="xp-fill" style="width:0%"></div>
-      </div>
-      <p class="xp-text"><span id="xp-cur">0</span> / 100 XP</p>
-    </div>
-    <div class="log-list" id="log-list">
-      <p class="log-empty">No catches yet — go fish! 🎣</p>
-    </div>
-    <nav class="bottom-nav">
-      <button class="nav-btn active">PROFILE</button>
-      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
-      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
-    </nav>
+  <div class="log-list" id="log-list" aria-label="Catch history" aria-live="polite">
+    <p class="log-empty">No catches yet — go fish! 🎣</p>
   </div>
+  <nav class="bottom-nav" aria-label="Main navigation">
+    <button class="nav-btn active" aria-label="Profile" aria-current="page">PROFILE</button>
+    <button class="nav-btn" onclick="goTo('screen-main')" aria-label="Home">HOME</button>
+    <button class="nav-btn" onclick="goTo('screen-help')" aria-label="Help">HELP</button>
+  </nav>
+</div>
 
-  <!-- Load order matters: data → auth → ar → game -->
-  <script src="fish-data.js"></script>
-  <script src="auth.js"></script>
-  <script src="weather.js"></script>
-  <script src="ar-scene.js"></script>
-  <script src="game.js"></script>
+<script src="fish-data.js"></script>
+<script src="auth.js"></script>
+<script src="weather.js"></script>
+<script src="ar-scene.js"></script>
+<script src="game.js"></script>
 </body>
 </html>
