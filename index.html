@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Catch & Release</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 1: HOME / SPLASH
+  ══════════════════════════════════════════ -->
+  <div id="screen-home" class="screen active">
+    <div class="home-top">
+      <h1 class="app-title">CATCH AND<br>RELEASE</h1>
+    </div>
+    <div class="home-fish-area">
+      <div class="fish-circle">
+        <span class="fish-emoji-lg">🐠</span>
+        <span class="fish-label-sm">(fish)</span>
+      </div>
+    </div>
+    <div class="home-actions">
+      <button class="btn-blue" onclick="showScreen('screen-login')">Login</button>
+      <button class="btn-blue" onclick="showScreen('screen-signup')">Sign up</button>
+      <p class="forgot-link" onclick="showScreen('screen-reset')">Forget Password?</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 2: SIGN UP
+  ══════════════════════════════════════════ -->
+  <div id="screen-signup" class="screen">
+    <div class="form-header">
+      <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
+    </div>
+    <div class="form-body">
+      <input class="text-input" type="text"     placeholder="Name" />
+      <input class="text-input" type="email"    placeholder="Email" />
+      <input class="text-input" type="password" placeholder="Password" />
+      <input class="text-input" type="password" placeholder="Confirm Password" />
+      <button class="btn-blue" onclick="showScreen('screen-onboarding')">Create an Account</button>
+      <p class="form-link" onclick="showScreen('screen-login')">Already Have an Account?</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 3: LOGIN
+  ══════════════════════════════════════════ -->
+  <div id="screen-login" class="screen">
+    <div class="form-header">
+      <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
+    </div>
+    <div class="form-body">
+      <input class="text-input" type="email"    placeholder="Email" />
+      <input class="text-input" type="password" placeholder="Password" />
+      <button class="btn-blue" onclick="showScreen('screen-main')">Login</button>
+      <p class="form-link" onclick="showScreen('screen-signup')">Already Have an Account?</p>
+      <p class="form-link small" onclick="showScreen('screen-reset')">Forgot Password?</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 4: RESET PASSWORD
+  ══════════════════════════════════════════ -->
+  <div id="screen-reset" class="screen">
+    <div class="form-header">
+      <h1 class="app-title-sm">CATCH &<br>RELEASE</h1>
+    </div>
+    <div class="form-body">
+      <input class="text-input" type="email"    placeholder="Email" />
+      <input class="text-input" type="password" placeholder="New Password" />
+      <input class="text-input" type="password" placeholder="Confirm New Password" />
+      <button class="btn-blue" onclick="showScreen('screen-login')">Continue to Login</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 5: SAFETY & ONBOARDING
+  ══════════════════════════════════════════ -->
+  <div id="screen-onboarding" class="screen screen-white">
+    <div class="onboard-header">
+      <h2 class="blue-title">CATCH AND RELEASE</h2>
+    </div>
+    <div class="onboard-scroll">
+      <h3 class="how-title">HOW TO FISH</h3>
+      <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
+      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">FLICK TO CAST</p><p class="how-sub">Swipe quickly to cast your line</p></div></div>
+      <div class="how-step"><div class="how-icon">📱</div><div><p class="how-bold">LIFT TO REEL</p><p class="how-sub">Raise your phone after you feel a fish!</p></div></div>
+      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">ACCESSORY HOOK</p><p class="how-sub">Earn achievements as you fish and explore your local waters.</p></div></div>
+      <div class="safety-block">
+        <p class="safety-title">⚠️ SAFETY FIRST!</p>
+        <p class="safety-body">Always be aware of your physical surroundings and fishing near the water's edge at all times.</p>
+        <p class="safety-sub">STAY IN A SAFE LOCATION TO START FISHING</p>
+      </div>
+    </div>
+    <button class="btn-blue btn-full" onclick="showScreen('screen-main')">LET'S FISH!</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 6: MAIN HOME / MAP
+  ══════════════════════════════════════════ -->
+  <div id="screen-main" class="screen screen-white">
+    <div class="topbar">
+      <div class="weather-pill">
+        <span>🌤️</span>
+        <div>
+          <div class="w-date">Thursday, March 5th</div>
+          <div class="w-temp">70°F · Cloudy</div>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap" id="map-wrap">
+      <!-- Illustrated map of Lake Eola area -->
+      <div class="map-scene">
+        <div class="map-sky"></div>
+        <div class="map-buildings">
+          <div class="building b1"></div>
+          <div class="building b2"></div>
+          <div class="building b3"></div>
+          <div class="building b4"></div>
+        </div>
+        <div class="map-grass"></div>
+        <div class="map-lake">
+          <span class="lake-label">Lake Eola</span>
+          <div class="map-fountain">⛲</div>
+        </div>
+        <div class="map-pin-spot" onclick="showARcast()">
+          <div class="pin-pulse"></div>
+          <div class="pin-dot">🎣</div>
+        </div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn active" onclick="showScreen('screen-main')">HOME</button>
+      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 7: HELP
+  ══════════════════════════════════════════ -->
+  <div id="screen-help" class="screen screen-white">
+    <div class="inner-topbar">
+      <button class="back-arrow" onclick="showScreen('screen-main')">←</button>
+      <h2 class="blue-title">HOW TO FISH</h2>
+    </div>
+    <div class="onboard-scroll">
+      <div class="how-step"><div class="how-icon">📍</div><div><p class="how-bold">FIND FISHING SPOTS</p><p class="how-sub">Discover spots nearby, learn local waters &amp; find a fish!</p></div></div>
+      <div class="how-step"><div class="how-icon">👆</div><div><p class="how-bold">FLICK TO CAST</p><p class="how-sub">Swipe quickly to cast your line</p></div></div>
+      <div class="how-step"><div class="how-icon">📱</div><div><p class="how-bold">LIFT TO REEL</p><p class="how-sub">Raise your phone after you feel a fish!</p></div></div>
+      <div class="how-step"><div class="how-icon">📒</div><div><p class="how-bold">ACCESSORY HOOK</p><p class="how-sub">Earn achievements as you fish and explore your local waters.</p></div></div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
+      <button class="nav-btn active">HELP</button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 8: AR CAMERA — CAST / REEL
+  ══════════════════════════════════════════ -->
+  <div id="screen-ar" class="screen">
+    <video id="ar-video" autoplay playsinline muted></video>
+    <canvas id="ar-canvas"></canvas>
+
+    <div class="ar-topbar-overlay">
+      <div class="weather-pill light">
+        <span>🌤️</span>
+        <div>
+          <div class="w-date">Thursday, March 5th</div>
+          <div class="w-temp">70°F · Cloudy</div>
+        </div>
+      </div>
+      <button class="ar-x-btn" onclick="stopAR()">✕</button>
+    </div>
+
+    <!-- Fishing line overlay drawn on canvas -->
+    <div class="ar-gesture-zone" id="ar-gesture-zone">
+      <!-- Swipe gesture captured here -->
+    </div>
+
+    <div class="ar-bobber-wrap hidden" id="ar-bobber-wrap">
+      <div class="ar-bobber" id="ar-bobber">🔴</div>
+    </div>
+
+    <!-- Cast hint -->
+    <div class="ar-instruction" id="ar-inst-cast">
+      <div class="inst-chip">
+        <span class="inst-arrow">👆</span>
+        <div><strong>FLICK TO CAST</strong><br><span>Swipe quickly to cast your line</span></div>
+      </div>
+    </div>
+
+    <!-- Reel hint -->
+    <div class="ar-instruction hidden" id="ar-inst-reel">
+      <div class="inst-chip">
+        <span class="inst-arrow">📱</span>
+        <div><strong>LIFT TO REEL</strong><br><span>Raise your phone to reel in your fish!</span></div>
+      </div>
+    </div>
+
+    <!-- Bite! alert -->
+    <div class="bite-banner hidden" id="bite-banner">🐟 GOT ONE — REEL!</div>
+
+    <nav class="bottom-nav ar-bottom-nav">
+      <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn" onclick="stopAR()">HOME</button>
+      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 9: YOU CAUGHT A FISH!
+  ══════════════════════════════════════════ -->
+  <div id="screen-catch" class="screen">
+    <video id="catch-bg" autoplay playsinline muted loop class="catch-bg-video"></video>
+    <div class="catch-overlay">
+      <div class="catch-card">
+        <h2 class="catch-headline">YOU CAUGHT<br>A FISH!</h2>
+        <div class="caught-fish-display" id="caught-fish-display">🐟</div>
+        <div class="catch-xp-badge">+100 EXP</div>
+        <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
+        <div class="catch-stars">★★★★★</div>
+        <div class="catch-action-row">
+          <button class="btn-blue" onclick="openFishDetail()">VIEW FISH</button>
+          <button class="btn-outline-blue" onclick="releaseFish()">RELEASE CATCH</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 10: FISH DETAIL
+  ══════════════════════════════════════════ -->
+  <div id="screen-fish-detail" class="screen screen-white">
+    <div class="fish-detail-topbar">
+      <button class="back-arrow" onclick="showScreen('screen-catch')">←</button>
+      <div class="restricted-badge" id="detail-badge">THE RESTRICTED SPECIES</div>
+    </div>
+    <div class="fish-detail-scroll">
+      <div class="fish-detail-photo" id="detail-photo">🐟</div>
+      <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
+      <div class="fish-info-block">
+        <p><span class="info-label">Scientific Name:</span> <span id="d-sci" class="info-val-blue"></span></p>
+        <p><span class="info-label">Average Size:</span> <span id="d-size"></span></p>
+        <p><span class="info-label">Found in Florida:</span> <span id="d-location"></span></p>
+        <p id="d-desc" class="detail-para"></p>
+        <div class="why-box">
+          <p class="why-title">Why Released?</p>
+          <p id="d-why"></p>
+        </div>
+      </div>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-btn active" onclick="showScreen('screen-profile')">PROFILE</button>
+      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
+      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
+    </nav>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SCREEN 11: MASTER FISHER LOG (PROFILE)
+  ══════════════════════════════════════════ -->
+  <div id="screen-profile" class="screen screen-white">
+    <div class="profile-top">
+      <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
+      <div class="angler-rank-badge">BEGINNER ANGLER</div>
+      <div class="xp-track">
+        <div class="xp-fill" id="xp-fill" style="width:25%"></div>
+      </div>
+      <p class="xp-text"><span id="xp-cur">25</span> / 100 XP</p>
+    </div>
+    <div class="log-list" id="log-list">
+      <p class="log-empty">No catches yet — go fish! 🎣</p>
+    </div>
+    <nav class="bottom-nav">
+      <button class="nav-btn active">PROFILE</button>
+      <button class="nav-btn" onclick="showScreen('screen-main')">HOME</button>
+      <button class="nav-btn" onclick="showScreen('screen-help')">HELP</button>
+    </nav>
+  </div>
+
+  <script src="fish-data.js"></script>
+  <script src="ar-scene.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
