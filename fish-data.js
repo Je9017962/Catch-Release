@@ -151,67 +151,92 @@ function getRandomFish() {
 
 // ── SVG fish illustration generator ──────────────────────────────
 // Returns a data: URI SVG — used when all real images fail to load.
+// viewBox is 400×220 with the fish centered and padded 24px on all sides
+// so object-fit:contain never clips the body.
 function makeFishSVG(fish) {
   const c  = fish.svgColor  || "#1565C0";
   const a  = fish.svgAccent || "#0D47A1";
-  const isGar = fish.id === "florida-gar";
 
-  if (isGar) {
-    // Long narrow gar shape
-    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160">
-  <rect width="320" height="160" fill="#E3F2FD"/>
-  <!-- body -->
-  <ellipse cx="155" cy="80" rx="100" ry="22" fill="${c}"/>
+  // ── Florida Gar — long narrow body ───────────────────────────
+  if (fish.id === "florida-gar") {
+    return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- bg -->
+  <rect width="400" height="200" fill="#E8F5E9"/>
+  <ellipse cx="200" cy="195" rx="170" ry="14" fill="#C8E6C9" opacity="0.5"/>
+  <!-- tail fork -->
+  <polygon points="320,80 370,55 370,145 320,120" fill="${a}"/>
+  <!-- body — long torpedo -->
+  <ellipse cx="195" cy="100" rx="145" ry="30" fill="${c}"/>
   <!-- long snout -->
-  <rect x="30" y="74" width="90" height="12" rx="5" fill="${a}"/>
-  <!-- tail -->
-  <polygon points="255,58 295,42 295,118 255,102" fill="${a}"/>
-  <!-- fin -->
-  <ellipse cx="160" cy="60" rx="30" ry="10" fill="${a}" transform="rotate(-15,160,60)"/>
+  <rect x="22" y="92" width="95" height="16" rx="7" fill="${a}"/>
+  <!-- underside lighter -->
+  <ellipse cx="195" cy="112" rx="110" ry="14" fill="white" opacity="0.15"/>
+  <!-- dorsal fin -->
+  <path d="M140,72 Q185,44 230,68" fill="${a}" opacity="0.85"/>
+  <!-- pectoral fin -->
+  <ellipse cx="155" cy="122" rx="26" ry="9" fill="${a}" opacity="0.7" transform="rotate(20,155,122)"/>
+  <!-- scale rows -->
+  <path d="M155,86 Q170,76 185,86" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M183,84 Q198,74 213,84" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M211,85 Q226,75 241,85" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <path d="M239,87 Q254,77 269,87" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- lateral line -->
+  <path d="M60,98 Q195,90 315,98" stroke="white" stroke-width="1.2" fill="none" opacity="0.3"/>
   <!-- eye -->
-  <circle cx="95" cy="78" r="5" fill="white"/>
-  <circle cx="95" cy="78" r="2.5" fill="#111"/>
-  <!-- scales pattern -->
-  <path d="M130,68 Q145,58 160,68" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
-  <path d="M155,68 Q170,58 185,68" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
-  <path d="M180,70 Q195,60 210,70" stroke="white" stroke-width="1.5" fill="none" opacity="0.4"/>
-  <!-- teeth hint -->
-  <path d="M32,74 L36,70 L40,74 L44,70 L48,74" stroke="white" stroke-width="1" fill="none"/>
-  <text x="160" y="140" font-family="Arial" font-size="13" fill="${a}" text-anchor="middle" font-weight="bold">FLORIDA GAR</text>
+  <circle cx="100" cy="97" r="7" fill="white"/>
+  <circle cx="100" cy="97" r="4" fill="#111"/>
+  <circle cx="102" cy="95" r="1.5" fill="white"/>
+  <!-- teeth -->
+  <path d="M24,92 L29,86 L34,92 L39,86 L44,92 L49,86 L54,92" stroke="white" stroke-width="1" fill="none"/>
+  <!-- label -->
+  <text x="200" y="182" font-family="Arial,sans-serif" font-size="13" fill="${a}" text-anchor="middle" font-weight="bold">FLORIDA GAR</text>
 </svg>`)}`;
   }
 
-  // Generic fish shape for all others
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
-  <rect width="320" height="200" fill="#E3F2FD"/>
-  <!-- water hint -->
-  <ellipse cx="160" cy="180" rx="130" ry="20" fill="#BBDEFB" opacity="0.6"/>
+  // ── Generic fish — all other species ─────────────────────────
+  // Fish occupies roughly x:28–372, y:28–192 → full body always visible
+  const label = fish.name || "FISH";
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(
+`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220">
+  <!-- bg gradient -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="220" fill="url(#bg)"/>
+  <!-- water ripple -->
+  <ellipse cx="200" cy="210" rx="165" ry="12" fill="#90CAF9" opacity="0.45"/>
   <!-- tail -->
-  <polygon points="248,76 290,46 290,154 248,124" fill="${a}"/>
+  <polygon points="308,88 364,54 364,166 308,132" fill="${a}"/>
   <!-- body -->
-  <ellipse cx="148" cy="100" rx="110" ry="55" fill="${c}"/>
-  <!-- belly -->
-  <ellipse cx="140" cy="115" rx="85" ry="30" fill="white" opacity="0.18"/>
-  <!-- dorsal fin -->
-  <path d="M90,48 Q130,20 175,45" stroke="${a}" stroke-width="3" fill="${a}" opacity="0.85"/>
+  <ellipse cx="190" cy="110" rx="140" ry="65" fill="${c}"/>
+  <!-- belly lighter -->
+  <ellipse cx="178" cy="128" rx="108" ry="35" fill="white" opacity="0.2"/>
+  <!-- dorsal fin — tall, centered -->
+  <path d="M108,50 Q160,18 218,48" fill="${a}" opacity="0.88"/>
+  <path d="M108,50 L218,48 L200,82 L128,84 Z" fill="${c}" opacity="0.6"/>
   <!-- pectoral fin -->
-  <ellipse cx="110" cy="118" rx="28" ry="12" fill="${a}" opacity="0.7" transform="rotate(25,110,118)"/>
+  <ellipse cx="136" cy="134" rx="34" ry="13" fill="${a}" opacity="0.7" transform="rotate(22,136,134)"/>
+  <!-- anal fin -->
+  <path d="M155,172 Q185,188 215,172" fill="${a}" opacity="0.65"/>
   <!-- lateral line -->
-  <path d="M60,98 Q155,88 245,98" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
-  <!-- scales -->
-  <path d="M100,82 Q115,72 130,82" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
-  <path d="M125,78 Q140,68 155,78" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
-  <path d="M150,76 Q165,66 180,76" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
-  <path d="M175,78 Q190,68 205,78" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <path d="M72,108 Q190,98 300,108" stroke="white" stroke-width="1.5" fill="none" opacity="0.35"/>
+  <!-- scale arcs -->
+  <path d="M118,90 Q135,78 152,90"  stroke="white" stroke-width="1.5" fill="none" opacity="0.38"/>
+  <path d="M148,86 Q165,74 182,86"  stroke="white" stroke-width="1.5" fill="none" opacity="0.38"/>
+  <path d="M178,84 Q195,72 212,84"  stroke="white" stroke-width="1.5" fill="none" opacity="0.38"/>
+  <path d="M208,85 Q225,73 242,85"  stroke="white" stroke-width="1.5" fill="none" opacity="0.38"/>
+  <path d="M238,88 Q255,76 272,88"  stroke="white" stroke-width="1.5" fill="none" opacity="0.38"/>
   <!-- eye -->
-  <circle cx="72" cy="93" r="9" fill="white"/>
-  <circle cx="72" cy="93" r="5" fill="#111"/>
-  <circle cx="74" cy="91" r="2" fill="white"/>
+  <circle cx="84" cy="102" r="11" fill="white"/>
+  <circle cx="84" cy="102" r="6.5" fill="#111"/>
+  <circle cx="86.5" cy="99.5" r="2.5" fill="white"/>
   <!-- mouth -->
-  <path d="M42,102 Q50,108 42,114" stroke="${a}" stroke-width="2" fill="none"/>
-  <!-- name label -->
-  <text x="160" y="185" font-family="Arial" font-size="11" fill="${a}" text-anchor="middle" font-weight="bold">${fish.name}</text>
+  <path d="M48,112 Q58,120 48,128" stroke="${a}" stroke-width="2.5" fill="none"/>
+  <!-- label -->
+  <text x="200" y="205" font-family="Arial,sans-serif" font-size="12" fill="${a}" text-anchor="middle" font-weight="bold">${label}</text>
 </svg>`)}`;
 }

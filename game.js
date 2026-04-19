@@ -43,7 +43,6 @@ function requireAuth(then) {
 function loadFishImage(fish, imgEl) {
   if (!imgEl) return;
 
-  // Show shimmer while loading
   imgEl.classList.add("img-loading");
   imgEl.style.display = "";
 
@@ -51,7 +50,6 @@ function loadFishImage(fish, imgEl) {
 
   function tryNext(index) {
     if (index >= sources.length) {
-      // All real images failed — use SVG illustration
       imgEl.src = makeFishSVG(fish);
       imgEl.classList.remove("img-loading");
       imgEl.onerror = null;
@@ -59,16 +57,30 @@ function loadFishImage(fish, imgEl) {
     }
 
     const testImg = new Image();
+    // crossOrigin helps with CORS-restricted CDNs on some mobile browsers
+    testImg.crossOrigin = "anonymous";
+    let timedOut = false;
+    const timer = setTimeout(() => {
+      timedOut = true;
+      tryNext(index + 1);
+    }, 6000);
+
     testImg.onload = () => {
+      if (timedOut) return;
+      clearTimeout(timer);
       imgEl.src = sources[index];
       imgEl.classList.remove("img-loading");
-      imgEl.onerror = () => tryNext(index + 1); // if it breaks later, try next
+      imgEl.onerror = () => {
+        imgEl.classList.add("img-loading");
+        tryNext(index + 1);
+      };
     };
-    testImg.onerror = () => tryNext(index + 1);
-    // Add cache-busting only on retry to avoid re-serving a cached 403
-    testImg.src = index === 0 ? sources[index] : sources[index] + "?v=" + index;
-    // Timeout: if no response in 5s, move on
-    setTimeout(() => { if (!testImg.complete) tryNext(index + 1); }, 5000);
+    testImg.onerror = () => {
+      if (timedOut) return;
+      clearTimeout(timer);
+      tryNext(index + 1);
+    };
+    testImg.src = sources[index];
   }
 
   tryNext(0);

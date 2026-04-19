@@ -258,8 +258,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', 
 }
 @keyframes popIn { from{transform:scale(.7);opacity:0} to{transform:scale(1);opacity:1} }
 .catch-headline { font-family: 'Anton', sans-serif; font-size: 1.6rem; color: var(--blue); letter-spacing: .04em; line-height: 1.1; margin-bottom: .8rem; }
-.caught-fish-photo-wrap { width: 100%; height: 150px; border-radius: var(--radius); overflow: hidden; margin-bottom: .7rem; background: #E3F2FD; }
-.caught-fish-photo { width: 100%; height: 100%; object-fit: cover; animation: wiggle .5s ease 2; display: block; }
+.caught-fish-photo-wrap { width: 100%; height: 160px; border-radius: var(--radius); overflow: hidden; margin-bottom: .7rem; background: linear-gradient(160deg,#C8E6FA 0%,#BBDEFB 100%); display: flex; align-items: center; justify-content: center; }
+.caught-fish-photo { width: 100%; height: 100%; object-fit: contain; object-position: center; animation: wiggle .5s ease 2; display: block; padding: 8px; }
 @keyframes wiggle { 0%,100%{transform:rotate(0)} 25%{transform:rotate(-4deg) scale(1.02)} 75%{transform:rotate(4deg) scale(1.02)} }
 .catch-xp-badge { display: inline-block; background: var(--blue); color: #fff; font-weight: 700; font-size: .75rem; padding: .25rem .9rem; border-radius: 30px; margin-bottom: .4rem; letter-spacing: .05em; }
 .caught-name    { font-family: 'Anton', sans-serif; font-size: 1.3rem; color: var(--text-dark); letter-spacing: .06em; margin-bottom: .2rem; }
@@ -275,8 +275,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', 
 .fish-detail-topbar { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.2rem; background: var(--white); border-bottom: 1px solid #E0E8F5; }
 .restricted-badge   { background: var(--blue); color: #fff; font-size: .7rem; font-weight: 700; padding: .3rem .8rem; border-radius: 30px; letter-spacing: .06em; }
 .fish-detail-scroll { flex: 1; overflow-y: auto; background: var(--off-white); }
-.fish-detail-photo-wrap  { width: 100%; height: 200px; overflow: hidden; background: #E3F2FD; }
-.fish-detail-photo-img   { width: 100%; height: 100%; object-fit: cover; display: block; }
+.fish-detail-photo-wrap  { width: 100%; height: 220px; overflow: hidden; background: linear-gradient(160deg,#C8E6FA 0%,#BBDEFB 100%); display: flex; align-items: center; justify-content: center; }
+.fish-detail-photo-img   { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; padding: 12px; }
 .fish-detail-title  { font-family: 'Anton', sans-serif; font-size: 1.5rem; color: var(--blue); text-align: center; padding: 1rem 1rem .5rem; letter-spacing: .05em; }
 .fish-info-block    { background: var(--white); margin: 0 .8rem .8rem; border-radius: var(--radius); padding: 1.2rem; display: flex; flex-direction: column; gap: .6rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
 .info-label    { font-weight: 700; font-size: .82rem; color: var(--text-dark); }
@@ -309,8 +309,8 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: 'Inter', 
 
 .log-item { background: var(--white); border-radius: var(--radius); display: flex; align-items: center; gap: .8rem; box-shadow: 0 2px 8px rgba(0,0,0,.06); cursor: pointer; overflow: hidden; transition: box-shadow .15s; }
 .log-item:hover { box-shadow: 0 4px 14px rgba(30,110,232,.15); }
-.log-img-wrap   { width: 68px; height: 68px; flex-shrink: 0; overflow: hidden; background: #E3F2FD; }
-.log-fish-photo { width: 68px; height: 68px; object-fit: cover; display: block; }
+.log-img-wrap   { width: 68px; height: 68px; flex-shrink: 0; overflow: hidden; background: linear-gradient(135deg,#C8E6FA,#BBDEFB); display: flex; align-items: center; justify-content: center; }
+.log-fish-photo { width: 68px; height: 68px; object-fit: contain; object-position: center; display: block; padding: 4px; }
 .log-fish-info  { flex: 1; padding: .6rem 0; }
 .log-fish-name  { font-weight: 700; font-size: .88rem; color: var(--text-dark); }
 .log-fish-meta  { font-size: .72rem; color: var(--text-light); margin-top: 2px; }
