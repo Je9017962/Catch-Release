@@ -1,50 +1,65 @@
-// game.js — Screen management, catch/release logic, profile & XP, env (weather/time)
+// game.js — Screen management, fish display with real images, catch/release, XP
 
-// ── State ───────────────────────────────────────────────────────
-let currentFish = null;
-let catchLog = [];
-let totalXP = 0;
+let currentFish  = null;
+let catchLog     = [];
+let totalXP      = 0;
 const XP_PER_LEVEL = 100;
 
-// ── Screen Manager ───────────────────────────────────────────────
+// ── Screen Manager ────────────────────────────────────────────────
 function showScreen(id) {
   document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   const el = document.getElementById(id);
   if (el) el.classList.add("active");
 }
 
-// ── Start AR from map pin ────────────────────────────────────────
+// ── Start AR from map ─────────────────────────────────────────────
 function showARcast() {
   showScreen("screen-ar");
-  // Small delay to let screen render before starting camera
   setTimeout(() => startAR(), 150);
 }
 
-// ── Called by ar-scene.js when fish is reeled in ─────────────────
+// ── Called by ar-scene.js when fish is successfully reeled ────────
 window.onFishReeled = function () {
   currentFish = getRandomFish();
   populateCatchScreen(currentFish);
 
-  // Use live camera frame as catch background if possible
+  // Use frozen camera frame as background on catch screen
   const catchBg = document.getElementById("catch-bg");
   const arVideo = document.getElementById("ar-video");
-  if (arVideo && arVideo.srcObject && catchBg) {
+  if (catchBg && arVideo && arVideo.srcObject) {
     catchBg.srcObject = arVideo.srcObject;
-    catchBg.play().catch(() => { });
+    catchBg.play().catch(() => {});
   }
 
   showScreen("screen-catch");
 };
 
-// ── Populate catch card ──────────────────────────────────────────
+// ── Populate catch card ───────────────────────────────────────────
 function populateCatchScreen(fish) {
-  const emojiEl = document.getElementById("caught-fish-display");
+  // Real photo
+  const imgEl = document.getElementById("caught-fish-img");
+  if (imgEl) {
+    imgEl.src = fish.img;
+    imgEl.alt = fish.name;
+    imgEl.onerror = function() { this.style.display="none"; };
+  }
   const nameEl = document.getElementById("caught-name");
-  if (emojiEl) emojiEl.textContent = fish.emoji;
   if (nameEl) nameEl.textContent = fish.name;
+
+  const xpEl = document.getElementById("catch-xp-text");
+  if (xpEl) xpEl.textContent = "+" + fish.xp + " XP";
+
+  const badgeEl = document.getElementById("catch-badge");
+  if (badgeEl) {
+    badgeEl.textContent = fish.badge;
+    badgeEl.style.background = fish.badgeColor || "var(--blue)";
+  }
+
+  const factEl = document.getElementById("catch-fun-fact");
+  if (factEl) factEl.textContent = "🎣 " + fish.funFact;
 }
 
-// ── Open fish detail from catch card ────────────────────────────
+// ── Open fish detail card ─────────────────────────────────────────
 function openFishDetail() {
   if (!currentFish) return;
   populateFishDetail(currentFish);
@@ -52,31 +67,37 @@ function openFishDetail() {
 }
 
 function populateFishDetail(fish) {
-  const titleEl = document.getElementById("detail-title");
-  const photoEl = document.getElementById("detail-photo");
-  const badgeEl = document.getElementById("detail-badge");
-
-  if (titleEl) titleEl.textContent = fish.name;
-  if (photoEl) photoEl.textContent = fish.emoji;
-  if (badgeEl) {
-    badgeEl.textContent = fish.badge;
-    badgeEl.style.background = fish.color || "var(--blue)";
+  // Photo
+  const photo = document.getElementById("detail-photo-img");
+  if (photo) {
+    photo.src = fish.img;
+    photo.alt = fish.name;
+    photo.onerror = function() { this.style.fontSize="5rem"; this.src=""; };
   }
 
-  const sciEl = document.getElementById("d-sci");
-  const sizeEl = document.getElementById("d-size");
-  const locEl = document.getElementById("d-location");
-  const descEl = document.getElementById("d-desc");
-  const whyEl = document.getElementById("d-why");
+  const titleEl = document.getElementById("detail-title");
+  if (titleEl) titleEl.textContent = fish.name;
 
-  if (sciEl) sciEl.textContent = fish.scientific;
-  if (sizeEl) sizeEl.textContent = fish.size;
-  if (locEl) locEl.textContent = fish.location;
-  if (descEl) descEl.textContent = fish.description;
-  if (whyEl) whyEl.textContent = fish.why;
+  const badgeEl = document.getElementById("detail-badge");
+  if (badgeEl) {
+    badgeEl.textContent = fish.badge;
+    badgeEl.style.background = fish.badgeColor || "var(--blue)";
+  }
+
+  setText("d-sci",         fish.scientific);
+  setText("d-size",        fish.size);
+  setText("d-location",    fish.location);
+  setText("d-conservation",fish.conservation);
+  setText("d-desc",        fish.description);
+  setText("d-why",         fish.why);
 }
 
-// ── Keep fish ────────────────────────────────────────────────────
+function setText(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = value || "";
+}
+
+// ── Keep fish ─────────────────────────────────────────────────────
 function keepFish() {
   if (!currentFish) return;
   logCatch(currentFish, "KEPT");
@@ -85,74 +106,56 @@ function keepFish() {
   showScreen("screen-main");
 }
 
-// ── Release fish ─────────────────────────────────────────────────
+// ── Release fish ──────────────────────────────────────────────────
 function releaseFish() {
   if (!currentFish) return;
   logCatch(currentFish, "RELEASED");
-  awardXP(Math.round(currentFish.xp * 1.25)); // Bonus XP for releasing!
+  awardXP(Math.round(currentFish.xp * 1.25)); // Bonus XP for releasing
   currentFish = null;
   showScreen("screen-main");
 }
 
-// ── XP system ────────────────────────────────────────────────────
+// ── XP ────────────────────────────────────────────────────────────
 function awardXP(amount) {
   totalXP += amount;
   updateXPDisplay();
 }
-
 function updateXPDisplay() {
   const lvlXP = totalXP % XP_PER_LEVEL;
-  const pct = (lvlXP / XP_PER_LEVEL) * 100;
-  const fillEl = document.getElementById("xp-fill");
-  const curEl = document.getElementById("xp-cur");
-  if (fillEl) fillEl.style.width = pct + "%";
-  if (curEl) curEl.textContent = lvlXP;
+  const pct   = (lvlXP / XP_PER_LEVEL) * 100;
+  const fill  = document.getElementById("xp-fill");
+  const cur   = document.getElementById("xp-cur");
+  if (fill) fill.style.width = pct + "%";
+  if (cur)  cur.textContent  = lvlXP;
 }
 
-// ── Catch log ────────────────────────────────────────────────────
+// ── Catch log ─────────────────────────────────────────────────────
 function logCatch(fish, action) {
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const now = new Date();
-
-  const entry = {
-    fish: fish,
-    action: action,
-    time: now.toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone: tz
-    }),
-    date: now.toLocaleDateString([], {
-      month: "short",
-      day: "numeric",
-      timeZone: tz
-    })
-  };
-  catchLog.unshift(entry); // newest first
+  catchLog.unshift({
+    fish, action,
+    time: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    date: new Date().toLocaleDateString([], { month: "short", day: "numeric" })
+  });
   renderCatchLog();
 }
 
 function renderCatchLog() {
   const list = document.getElementById("log-list");
   if (!list) return;
-
   if (catchLog.length === 0) {
     list.innerHTML = '<p class="log-empty">No catches yet — go fish! 🎣</p>';
     return;
   }
-
-  list.innerHTML = catchLog.map((entry, i) => `
+  list.innerHTML = catchLog.map((e, i) => `
     <div class="log-item" onclick="viewLogFish(${i})">
-      <div class="log-fish-icon">${entry.fish.emoji}</div>
+      <img class="log-fish-photo" src="${e.fish.img}" alt="${e.fish.name}"
+           onerror="this.style.display='none'">
       <div class="log-fish-info">
-        <div class="log-fish-name">${entry.fish.name}</div>
-        <div class="log-fish-meta">${entry.date} · ${entry.time} · +${entry.fish.xp} XP</div>
+        <div class="log-fish-name">${e.fish.name}</div>
+        <div class="log-fish-meta">${e.date} · ${e.time} · +${e.fish.xp} XP</div>
       </div>
-      <div class="log-action ${entry.action === 'KEPT' ? 'log-kept' : 'log-released'}">
-        ${entry.action}
-      </div>
-    </div>
-  `).join("");
+      <div class="log-action ${e.action === 'KEPT' ? 'log-kept' : 'log-released'}">${e.action}</div>
+    </div>`).join("");
 }
 
 function viewLogFish(index) {
@@ -162,83 +165,3 @@ function viewLogFish(index) {
   populateFishDetail(entry.fish);
   showScreen("screen-fish-detail");
 }
-
-// ── Environment: location, weather, date & time ─────────────────
-
-// Call this once on app load (e.g. in a script tag or DOMContentLoaded)
-function initEnvironment() {
-  updateDateTime();
-  setInterval(updateDateTime, 60000); // refresh every minute
-
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        updateWeather(latitude, longitude);
-      },
-      () => {
-        // Fallback: Lake Eola (Orlando) coords
-        updateWeather(28.5437, -81.3733);
-      },
-      { enableHighAccuracy: true, timeout: 8000, maximumAge: 600000 }
-    );
-  } else {
-    // No geolocation, fallback to Lake Eola
-    updateWeather(28.5437, -81.3733);
-  }
-}
-
-function updateDateTime() {
-  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const now = new Date();
-
-  const dateEl = document.getElementById("w-date");
-  const timeEl = document.getElementById("w-time");
-
-  if (dateEl) {
-    dateEl.textContent = now.toLocaleDateString("en-US", {
-      weekday: "long",
-      month: "long",
-      day: "numeric",
-      timeZone: tz
-    });
-  }
-
-  if (timeEl) {
-    timeEl.textContent = now.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone: tz
-    });
-  }
-}
-
-async function updateWeather(lat, lon) {
-  const tempEl = document.getElementById("w-temp");
-  const locEl = document.getElementById("w-location");
-  if (!tempEl && !locEl) return;
-
-  try {
-    const apiKey = "YOUR_OPENWEATHERMAP_API_KEY"; // replace with real key
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
-
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (tempEl && data.main && typeof data.main.temp === "number") {
-      tempEl.textContent = Math.round(data.main.temp) + "°F";
-    }
-    if (locEl && data.name) {
-      locEl.textContent = data.name;
-    }
-  } catch (err) {
-    console.error("Weather error:", err);
-  }
-}
-
-// Optional: auto-init when DOM is ready
-window.addEventListener("load", () => {
-  try {
-    initEnvironment();
-  } catch (_) { }
-});

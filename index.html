@@ -179,33 +179,30 @@
       <button class="ar-x-btn" onclick="stopAR()">✕</button>
     </div>
 
-    <!-- Fishing line overlay drawn on canvas -->
-    <div class="ar-gesture-zone" id="ar-gesture-zone">
-      <!-- Swipe gesture captured here -->
-    </div>
-
-    <div class="ar-bobber-wrap hidden" id="ar-bobber-wrap">
-      <div class="ar-bobber" id="ar-bobber">🔴</div>
-    </div>
-
     <!-- Cast hint -->
     <div class="ar-instruction" id="ar-inst-cast">
       <div class="inst-chip">
         <span class="inst-arrow">👆</span>
-        <div><strong>FLICK TO CAST</strong><br><span>Swipe quickly to cast your line</span></div>
+        <div><strong>TAP ANYWHERE TO CAST</strong><br><span>Tap the screen to cast your line</span></div>
       </div>
     </div>
 
-    <!-- Reel hint -->
+    <!-- Waiting hint (shown after cast, before bite) -->
     <div class="ar-instruction hidden" id="ar-inst-reel">
       <div class="inst-chip">
-        <span class="inst-arrow">📱</span>
-        <div><strong>LIFT TO REEL</strong><br><span>Raise your phone to reel in your fish!</span></div>
+        <span class="inst-arrow">⏳</span>
+        <div><strong>WAITING FOR A BITE…</strong><br><span>Watch the bobber — tap REEL when it dips!</span></div>
       </div>
     </div>
 
-    <!-- Bite! alert -->
-    <div class="bite-banner hidden" id="bite-banner">🐟 GOT ONE — REEL!</div>
+    <!-- Bite alert banner -->
+    <div class="bite-banner hidden" id="bite-banner">🐟 GOT ONE — TAP REEL!</div>
+
+    <!-- ★ BIG REEL BUTTON — appears only when there's a bite ★ -->
+    <button class="reel-btn hidden" id="reel-btn" onclick="doReel()">
+      <span class="reel-icon">🎣</span>
+      <span class="reel-label">REEL!</span>
+    </button>
 
     <nav class="bottom-nav ar-bottom-nav">
       <button class="nav-btn" onclick="showScreen('screen-profile')">PROFILE</button>
@@ -222,14 +219,19 @@
     <div class="catch-overlay">
       <div class="catch-card">
         <h2 class="catch-headline">YOU CAUGHT<br>A FISH!</h2>
-        <div class="caught-fish-display" id="caught-fish-display">🐟</div>
-        <div class="catch-xp-badge">+100 EXP</div>
-        <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
-        <div class="catch-stars">★★★★★</div>
-        <div class="catch-action-row">
-          <button class="btn-blue" onclick="openFishDetail()">VIEW FISH</button>
-          <button class="btn-outline-blue" onclick="releaseFish()">RELEASE CATCH</button>
+        <!-- Real fish photo -->
+        <div class="caught-fish-photo-wrap">
+          <img id="caught-fish-img" src="" alt="fish" class="caught-fish-photo" />
         </div>
+        <div id="catch-badge" class="catch-xp-badge">KEYSTONE SPECIES</div>
+        <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
+        <div class="catch-xp-row"><span id="catch-xp-text">+100 XP</span> ★★★★★</div>
+        <p class="catch-fun-fact" id="catch-fun-fact"></p>
+        <div class="catch-action-row">
+          <button class="btn-blue" onclick="openFishDetail()">LEARN MORE</button>
+          <button class="btn-outline-blue" onclick="releaseFish()">RELEASE 🌊</button>
+        </div>
+        <button class="btn-keep-small" onclick="keepFish()">Keep Fish</button>
       </div>
     </div>
   </div>
@@ -243,15 +245,18 @@
       <div class="restricted-badge" id="detail-badge">THE RESTRICTED SPECIES</div>
     </div>
     <div class="fish-detail-scroll">
-      <div class="fish-detail-photo" id="detail-photo">🐟</div>
+      <div class="fish-detail-photo-wrap">
+        <img id="detail-photo-img" src="" alt="fish" class="fish-detail-photo-img" />
+      </div>
       <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
       <div class="fish-info-block">
         <p><span class="info-label">Scientific Name:</span> <span id="d-sci" class="info-val-blue"></span></p>
         <p><span class="info-label">Average Size:</span> <span id="d-size"></span></p>
         <p><span class="info-label">Found in Florida:</span> <span id="d-location"></span></p>
+        <p><span class="info-label">Conservation Status:</span> <span id="d-conservation"></span></p>
         <p id="d-desc" class="detail-para"></p>
         <div class="why-box">
-          <p class="why-title">Why Released?</p>
+          <p class="why-title">🌊 Why We Release</p>
           <p id="d-why"></p>
         </div>
       </div>
