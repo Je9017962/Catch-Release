@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"/>
-  <meta name="theme-color" content="#1E6EE8"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta name="theme-color" content="#1E6EE8">
   <title>Catch &amp; Release</title>
-  <link rel="stylesheet" href="style.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<!-- ═══════════════════════════ SCREEN 1: SPLASH ═══════════════════════════ -->
+<!-- ═══ SCREEN 1: SPLASH ═══ -->
 <div id="screen-home" class="screen active" role="main" aria-label="Catch and Release home screen">
   <div class="home-top">
     <h1 class="app-title">CATCH AND<br>RELEASE</h1>
   </div>
   <div class="home-fish-area" aria-hidden="true">
     <div class="fish-circle">
-      <img src="common_snook.png" alt="Common Snook" class="fish-logo-img"/>
+      <img src="common_snook.png" alt="Common Snook" class="fish-logo-img">
     </div>
   </div>
   <div class="home-actions">
@@ -27,8 +27,8 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 2: SIGN UP ════════════════════════════ -->
-<div id="screen-signup" class="screen" role="main" aria-label="Create account">
+<!-- ═══ SCREEN 2: SIGN UP ═══ -->
+<div id="screen-signup" class="screen" role="region" aria-label="Create account">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
     <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
@@ -37,19 +37,19 @@
     <p class="form-section-title">CREATE ACCOUNT</p>
     <div class="input-group">
       <label class="input-label" for="signup-name">Full Name</label>
-      <input class="text-input" id="signup-name" type="text" placeholder="Your name" autocomplete="name" aria-required="true"/>
+      <input class="text-input" id="signup-name" type="text" placeholder="Your name" autocomplete="name" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="signup-email">Email Address</label>
-      <input class="text-input" id="signup-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true"/>
+      <input class="text-input" id="signup-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="signup-password">Password</label>
-      <input class="text-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" aria-required="true"/>
+      <input class="text-input" id="signup-password" type="password" placeholder="Min. 8 characters" autocomplete="new-password" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="signup-confirm">Confirm Password</label>
-      <input class="text-input" id="signup-confirm" type="password" placeholder="Repeat password" autocomplete="new-password" aria-required="true"/>
+      <input class="text-input" id="signup-confirm" type="password" placeholder="Repeat password" autocomplete="new-password" aria-required="true">
     </div>
     <p class="form-error hidden" id="signup-error" role="alert" aria-live="assertive"></p>
     <button class="btn-blue" id="signup-btn" onclick="doSignup()" aria-label="Create account">Create Account</button>
@@ -57,8 +57,8 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 3: LOGIN ══════════════════════════════ -->
-<div id="screen-login" class="screen" role="main" aria-label="Log in">
+<!-- ═══ SCREEN 3: LOGIN ═══ -->
+<div id="screen-login" class="screen" role="region" aria-label="Log in">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
     <h1 class="app-title-sm">CATCH AND<br>RELEASE</h1>
@@ -67,11 +67,11 @@
     <p class="form-section-title">WELCOME BACK</p>
     <div class="input-group">
       <label class="input-label" for="login-email">Email Address</label>
-      <input class="text-input" id="login-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true"/>
+      <input class="text-input" id="login-email" type="email" placeholder="you@email.com" autocomplete="email" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="login-password">Password</label>
-      <input class="text-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password" aria-required="true"/>
+      <input class="text-input" id="login-password" type="password" placeholder="Your password" autocomplete="current-password" aria-required="true">
     </div>
     <p class="form-error hidden" id="login-error" role="alert" aria-live="assertive"></p>
     <button class="btn-blue" id="login-btn" onclick="doLogin()" aria-label="Log in">Log In</button>
@@ -80,8 +80,8 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 4: RESET PASSWORD ═════════════════════ -->
-<div id="screen-reset" class="screen" role="main" aria-label="Reset password">
+<!-- ═══ SCREEN 4: RESET PASSWORD ═══ -->
+<div id="screen-reset" class="screen" role="region" aria-label="Reset password">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-login')" aria-label="Back to login">←</button>
     <h1 class="app-title-sm">RESET<br>PASSWORD</h1>
@@ -91,15 +91,15 @@
     <p class="form-hint">Enter your registered email and choose a new password.</p>
     <div class="input-group">
       <label class="input-label" for="reset-email">Email Address</label>
-      <input class="text-input" id="reset-email" type="email" placeholder="you@email.com" aria-required="true"/>
+      <input class="text-input" id="reset-email" type="email" placeholder="you@email.com" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="reset-pass1">New Password</label>
-      <input class="text-input" id="reset-pass1" type="password" placeholder="New password" aria-required="true"/>
+      <input class="text-input" id="reset-pass1" type="password" placeholder="New password" aria-required="true">
     </div>
     <div class="input-group">
       <label class="input-label" for="reset-pass2">Confirm New Password</label>
-      <input class="text-input" id="reset-pass2" type="password" placeholder="Repeat new password" aria-required="true"/>
+      <input class="text-input" id="reset-pass2" type="password" placeholder="Repeat new password" aria-required="true">
     </div>
     <p class="form-error hidden" id="reset-error" role="alert" aria-live="assertive"></p>
     <p class="form-success hidden" id="reset-success" role="status" aria-live="polite"></p>
@@ -107,8 +107,8 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 5: ONBOARDING ════════════════════════ -->
-<div id="screen-onboarding" class="screen screen-white" role="main" aria-label="How to fish — onboarding">
+<!-- ═══ SCREEN 5: ONBOARDING ═══ -->
+<div id="screen-onboarding" class="screen screen-white" role="region" aria-label="How to fish — onboarding">
   <div class="onboard-header">
     <h2 class="blue-title">CATCH AND RELEASE</h2>
   </div>
@@ -127,10 +127,10 @@
   <button class="btn-blue btn-full" onclick="completeOnboarding()" aria-label="Start fishing">LET'S FISH!</button>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 6: HOME / MAP ════════════════════════ -->
-<div id="screen-main" class="screen screen-white" role="main" aria-label="Home map — Lake Eola">
+<!-- ═══ SCREEN 6: HOME / MAP ═══ -->
+<div id="screen-main" class="screen screen-white" role="region" aria-label="Home map — Lake Eola">
   <div class="topbar">
-    <div class="weather-pill" id="weather-pill" aria-live="polite" aria-label="Current weather">
+    <div class="weather-pill" id="weather-pill" role="group" aria-live="polite" aria-label="Current weather">
       <span id="weather-icon" aria-hidden="true">🌤️</span>
       <div>
         <div class="w-date" id="weather-date">Loading…</div>
@@ -152,8 +152,8 @@
         <div class="map-fountain" aria-hidden="true">⛲</div>
       </div>
       <button class="map-pin-spot" onclick="showARcast()" aria-label="Start fishing at Lake Eola">
-        <div class="pin-pulse" aria-hidden="true"></div>
-        <div class="pin-dot" aria-hidden="true">🎣</div>
+        <span class="pin-pulse" aria-hidden="true"></span>
+        <span class="pin-dot" aria-hidden="true">🎣</span>
       </button>
     </div>
   </div>
@@ -164,8 +164,8 @@
   </nav>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 7: HELP ══════════════════════════════ -->
-<div id="screen-help" class="screen screen-white" role="main" aria-label="Help — how to fish">
+<!-- ═══ SCREEN 7: HELP ═══ -->
+<div id="screen-help" class="screen screen-white" role="region" aria-label="Help — how to fish">
   <div class="inner-topbar">
     <button class="back-arrow" onclick="goTo('screen-main')" aria-label="Back to home">←</button>
     <h2 class="blue-title">HOW TO FISH</h2>
@@ -183,13 +183,13 @@
   </nav>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 8: AR CAMERA ═════════════════════════ -->
-<div id="screen-ar" class="screen" role="main" aria-label="AR fishing camera">
+<!-- ═══ SCREEN 8: AR CAMERA ═══ -->
+<div id="screen-ar" class="screen" role="region" aria-label="AR fishing camera">
   <video id="ar-video" autoplay playsinline muted aria-hidden="true"></video>
   <canvas id="ar-canvas" aria-hidden="true"></canvas>
 
   <div class="ar-topbar-overlay" aria-live="polite">
-    <div class="weather-pill light" aria-label="Current weather">
+    <div class="weather-pill light" role="group" aria-label="Current weather">
       <span id="ar-weather-icon" aria-hidden="true">🌤️</span>
       <div>
         <div class="w-date" id="ar-weather-date">—</div>
@@ -227,14 +227,14 @@
   </nav>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 9: CATCH CARD ════════════════════════ -->
-<div id="screen-catch" class="screen" role="main" aria-label="You caught a fish!">
+<!-- ═══ SCREEN 9: CATCH CARD ═══ -->
+<div id="screen-catch" class="screen" role="region" aria-label="You caught a fish!">
   <canvas id="catch-bg-canvas" aria-hidden="true"></canvas>
   <div class="catch-overlay">
     <div class="catch-card" role="dialog" aria-modal="true" aria-labelledby="catch-headline">
       <h2 class="catch-headline" id="catch-headline">YOU CAUGHT<br>A FISH!</h2>
       <div class="caught-fish-photo-wrap">
-        <img id="caught-fish-img" src="" alt="" class="caught-fish-photo"/>
+        <img id="caught-fish-img" src="#" alt="" class="caught-fish-photo">
       </div>
       <div id="catch-badge" class="catch-xp-badge">KEYSTONE SPECIES</div>
       <div class="caught-name" id="caught-name">LARGEMOUTH BASS</div>
@@ -249,15 +249,15 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 10: FISH DETAIL ══════════════════════ -->
-<div id="screen-fish-detail" class="screen screen-white" role="main" aria-label="Fish information">
+<!-- ═══ SCREEN 10: FISH DETAIL ═══ -->
+<div id="screen-fish-detail" class="screen screen-white" role="region" aria-label="Fish information">
   <div class="fish-detail-topbar">
     <button class="back-arrow" id="fish-detail-back" onclick="showScreen('screen-catch')" aria-label="Back">←</button>
-    <div class="restricted-badge" id="detail-badge" aria-label="Fish conservation status">KEYSTONE SPECIES</div>
+    <div class="restricted-badge" id="detail-badge" role="status" aria-label="Fish conservation status">KEYSTONE SPECIES</div>
   </div>
   <div class="fish-detail-scroll">
     <div class="fish-detail-photo-wrap">
-      <img id="detail-photo-img" src="" alt="" class="fish-detail-photo-img"/>
+      <img id="detail-photo-img" src="#" alt="" class="fish-detail-photo-img">
     </div>
     <h2 class="fish-detail-title" id="detail-title">LARGEMOUTH BASS</h2>
     <div class="fish-info-block">
@@ -279,8 +279,8 @@
   </nav>
 </div>
 
-<!-- ═══════════════════════════ SCREEN 11: PROFILE / LOG ════════════════════ -->
-<div id="screen-profile" class="screen screen-white" role="main" aria-label="Fisher profile and catch log">
+<!-- ═══ SCREEN 11: PROFILE / LOG ═══ -->
+<div id="screen-profile" class="screen screen-white" role="region" aria-label="Fisher profile and catch log">
   <div class="profile-top">
     <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
     <p class="profile-username" id="profile-username"></p>
@@ -290,7 +290,7 @@
     </div>
     <p class="xp-text"><span id="xp-cur">0</span> XP total · <span id="fish-count">0</span> fish caught</p>
   </div>
-  <div class="log-list" id="log-list" aria-label="Catch history" aria-live="polite">
+  <div class="log-list" id="log-list" role="list" aria-label="Catch history" aria-live="polite">
     <p class="log-empty">No catches yet. Head out and start fishing! 🎣</p>
   </div>
   <nav class="bottom-nav" aria-label="Main navigation">
