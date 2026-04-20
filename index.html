@@ -10,14 +10,14 @@
 </head>
 <body>
 
-<!-- ═══ SCREEN 1: SPLASH ═══ -->
+<!-- ═══════════════════════════ SCREEN 1: SPLASH ═══════════════════════════ -->
 <div id="screen-home" class="screen active" role="main" aria-label="Catch and Release home screen">
   <div class="home-top">
     <h1 class="app-title">CATCH AND<br>RELEASE</h1>
   </div>
   <div class="home-fish-area" aria-hidden="true">
     <div class="fish-circle">
-      <img src="common_snook.png" alt="Common Snook" class="fish-logo-img">
+      <img src="common_snook_transparent.png" alt="Common Snook" class="fish-logo-img">
     </div>
   </div>
   <div class="home-actions">
@@ -27,7 +27,7 @@
   </div>
 </div>
 
-<!-- ═══ SCREEN 2: SIGN UP ═══ -->
+<!-- ═══════════════════════════ SCREEN 2: SIGN UP ════════════════════════════ -->
 <div id="screen-signup" class="screen" role="region" aria-label="Create account">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
@@ -57,7 +57,7 @@
   </div>
 </div>
 
-<!-- ═══ SCREEN 3: LOGIN ═══ -->
+<!-- ═══════════════════════════ SCREEN 3: LOGIN ══════════════════════════════ -->
 <div id="screen-login" class="screen" role="region" aria-label="Log in">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-home')" aria-label="Back to home">←</button>
@@ -80,7 +80,7 @@
   </div>
 </div>
 
-<!-- ═══ SCREEN 4: RESET PASSWORD ═══ -->
+<!-- ═══════════════════════════ SCREEN 4: RESET PASSWORD ═════════════════════ -->
 <div id="screen-reset" class="screen" role="region" aria-label="Reset password">
   <div class="form-header">
     <button class="form-back-btn" onclick="showScreen('screen-login')" aria-label="Back to login">←</button>
@@ -107,7 +107,7 @@
   </div>
 </div>
 
-<!-- ═══ SCREEN 5: ONBOARDING ═══ -->
+<!-- ═══════════════════════════ SCREEN 5: ONBOARDING ════════════════════════ -->
 <div id="screen-onboarding" class="screen screen-white" role="region" aria-label="How to fish — onboarding">
   <div class="onboard-header">
     <h2 class="blue-title">CATCH AND RELEASE</h2>
@@ -127,7 +127,7 @@
   <button class="btn-blue btn-full" onclick="completeOnboarding()" aria-label="Start fishing">LET'S FISH!</button>
 </div>
 
-<!-- ═══ SCREEN 6: HOME / MAP ═══ -->
+<!-- ═══════════════════════════ SCREEN 6: HOME / MAP ════════════════════════ -->
 <div id="screen-main" class="screen screen-white" role="region" aria-label="Home map — Lake Eola">
   <div class="topbar">
     <div class="weather-pill" id="weather-pill" role="group" aria-live="polite" aria-label="Current weather">
@@ -164,7 +164,7 @@
   </nav>
 </div>
 
-<!-- ═══ SCREEN 7: HELP ═══ -->
+<!-- ═══════════════════════════ SCREEN 7: HELP ══════════════════════════════ -->
 <div id="screen-help" class="screen screen-white" role="region" aria-label="Help — how to fish">
   <div class="inner-topbar">
     <button class="back-arrow" onclick="goTo('screen-main')" aria-label="Back to home">←</button>
@@ -183,7 +183,7 @@
   </nav>
 </div>
 
-<!-- ═══ SCREEN 8: AR CAMERA ═══ -->
+<!-- ═══════════════════════════ SCREEN 8: AR CAMERA ═════════════════════════ -->
 <div id="screen-ar" class="screen" role="region" aria-label="AR fishing camera">
   <video id="ar-video" autoplay playsinline muted aria-hidden="true"></video>
   <canvas id="ar-canvas" aria-hidden="true"></canvas>
@@ -227,7 +227,7 @@
   </nav>
 </div>
 
-<!-- ═══ SCREEN 9: CATCH CARD ═══ -->
+<!-- ═══════════════════════════ SCREEN 9: CATCH CARD ════════════════════════ -->
 <div id="screen-catch" class="screen" role="region" aria-label="You caught a fish!">
   <canvas id="catch-bg-canvas" aria-hidden="true"></canvas>
   <div class="catch-overlay">
@@ -249,7 +249,7 @@
   </div>
 </div>
 
-<!-- ═══ SCREEN 10: FISH DETAIL ═══ -->
+<!-- ═══════════════════════════ SCREEN 10: FISH DETAIL ══════════════════════ -->
 <div id="screen-fish-detail" class="screen screen-white" role="region" aria-label="Fish information">
   <div class="fish-detail-topbar">
     <button class="back-arrow" id="fish-detail-back" onclick="showScreen('screen-catch')" aria-label="Back">←</button>
@@ -279,7 +279,7 @@
   </nav>
 </div>
 
-<!-- ═══ SCREEN 11: PROFILE / LOG ═══ -->
+<!-- ═══════════════════════════ SCREEN 11: PROFILE / LOG ════════════════════ -->
 <div id="screen-profile" class="screen screen-white" role="region" aria-label="Fisher profile and catch log">
   <div class="profile-top">
     <h2 class="blue-title profile-title">MASTER<br>FISHER LOG</h2>
