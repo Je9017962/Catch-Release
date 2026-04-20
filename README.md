@@ -1,4 +1,4 @@
-# 🎣 Catch & Release AR
+# Catch & Release AR
 
 An augmented reality fishing experience set at **Lake Eola, Orlando, Florida**. Point your phone camera at the water, cast your line, reel in real Lake Eola fish species, and learn why each one should be released back into the wild.
 
@@ -90,27 +90,6 @@ catch-and-release-ar/
 ├── weather.js      Live weather: GPS, Open-Meteo, reverse geocoding
 └── fish-data.js    Six fish species with photos, SVG fallbacks, and conservation information
 ```
-
-## Deploy to Netlify
-
-**Option A — Drag and Drop (fastest)**
-1. Go to [netlify.com/drop](https://netlify.com/drop).
-2. Drag the `catch-and-release-ar` folder onto the page.
-3. Your site will be live in about ten seconds with a free HTTPS URL.
-
-**Option B — Netlify CLI**
-```bash
-npm install -g netlify-cli
-cd catch-and-release-ar
-netlify deploy --prod --dir .
-```
-
-**Option C — GitHub and Netlify**
-1. Push the folder to a GitHub repository.
-2. Connect the repository in Netlify under Site Settings and then Build and Deploy.
-3. Set the publish directory to `/`. No build step is needed.
-
-HTTPS is required for camera access on mobile browsers. Netlify provides HTTPS automatically on all deployments.
 
 ## Local Development
 
