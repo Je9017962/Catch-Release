@@ -322,7 +322,7 @@ function renderCatchLog() {
   if (!list) return;
   const log = window.catchLog || [];
   if (log.length === 0) {
-    list.innerHTML = '<p class="log-empty">No catches yet — go fish! 🎣</p>';
+    list.innerHTML = '<p class="log-empty">No catches yet. Head out and start fishing! 🎣</p>';
     updateXPDisplay();
     return;
   }
@@ -393,3 +393,4 @@ function loadFishImage(fish, imgEl) {
   }
   tryNext(0);
 }
+
