@@ -1,3 +1,4 @@
+// Jeremiah Morris-Wyley
 // fish-data.js — Lake Eola / Central Florida fish
 // Each fish has multiple image sources tried in order, plus an SVG fallback drawn on canvas.
 
