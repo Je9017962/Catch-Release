@@ -6,7 +6,7 @@ An augmented reality fishing experience set at **Lake Eola, Orlando, Florida**. 
 
 ## What It Is
 
-Catch & Release is a browser-based WebAR app — no app store download required. It uses your phone's rear camera as the AR viewport and overlays an interactive fishing scene on top of the live feed. Six real fish species native to Lake Eola and Central Florida waters are featured, each with accurate visual anatomy, conservation status, and educational release information.
+Catch & Release is a browser-based WebAR app that does not require an app store to download. It uses your device's rear camera as the AR viewport and overlays an interactive fishing scene on top of the live feed. Six real fish species native to Lake Eola and Central Florida waters are featured, each with accurate visual anatomy, conservation status, and educational release information.
 
 ## How to Play
 
