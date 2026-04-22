@@ -1,4 +1,3 @@
-// Jeremiah Morris-Wyley
 // game.js — Screen/nav management, audio, image loading, catch/release, XP, event wiring
 
 window.currentUserEmail = null;
