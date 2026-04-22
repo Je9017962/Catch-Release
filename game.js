@@ -1,3 +1,4 @@
+// Jeremiah Morris-Wyley
 // game.js — Screen/nav management, audio, image loading, catch/release, XP, event wiring
 
 window.currentUserEmail = null;
@@ -353,32 +354,67 @@ function renderCatchLog() {
         updateXPDisplay();
         return;
     }
-    list.innerHTML = log.map((e, i) => `
-        <div class="log-item" role="button" tabindex="0"
-             aria-label="${e.name} — ${e.action} on ${e.date}"
-             data-log-index="${i}">
-            <div class="log-img-wrap">
-                <img class="log-fish-photo" src="" alt="${e.name}" data-idx="${i}"/>
+
+    // Group entries by fish species (fishId)
+    const groups = {};
+    log.forEach((e, i) => {
+        if (!groups[e.fishId]) {
+            groups[e.fishId] = { name: e.name, fishId: e.fishId, xp: e.xp, entries: [], fish_like: {
+                imgs: e.imgs || [], svgColor: e.svgColor, svgAccent: e.svgAccent, name: e.name, id: e.fishId
+            }};
+        }
+        groups[e.fishId].entries.push({ ...e, original_index: i });
+    });
+
+    // Build HTML — one card per species
+    let html = "";
+    let group_index = 0;
+    Object.values(groups).forEach(group => {
+        const kept_count     = group.entries.filter(e => e.action === "KEPT").length;
+        const released_count = group.entries.filter(e => e.action === "RELEASED").length;
+        const total          = group.entries.length;
+        const most_recent    = group.entries[0];
+
+        // Most recent log index for clicking through to fish detail
+        const first_original_index = most_recent.original_index;
+
+        html += `
+        <div class="log-group" role="button" tabindex="0"
+             aria-label="${group.name} — ${total} caught, tap to view detail"
+             data-log-index="${first_original_index}"
+             data-group-id="${group_index}">
+            <div class="log-group-img-wrap">
+                <img class="log-fish-photo" src="" alt="${group.name}" data-group-img="${group_index}"/>
+                ${total > 1 ? `<div class="log-count-badge">${total}</div>` : ""}
             </div>
             <div class="log-fish-info">
-                <div class="log-fish-name">${e.name}</div>
-                <div class="log-fish-meta">${e.date} · ${e.time} · +${e.xp} XP</div>
+                <div class="log-fish-name">${group.name}</div>
+                <div class="log-fish-meta">+${group.xp} XP each</div>
+                <div class="log-action-counts">
+                    ${released_count > 0 ? `<span class="log-action log-released">🌊 ${released_count} Released</span>` : ""}
+                    ${kept_count > 0     ? `<span class="log-action log-kept">🎣 ${kept_count} Kept</span>` : ""}
+                </div>
             </div>
-            <div class="log-action ${e.action === "KEPT" ? "log-kept" : "log-released"}">${e.action}</div>
-        </div>`).join("");
+        </div>`;
+        group_index++;
+    });
 
-    list.querySelectorAll(".log-item").forEach(item => {
+    list.innerHTML = html;
+
+    // Attach click/keydown to each group card
+    list.querySelectorAll(".log-group").forEach(item => {
         item.addEventListener("click", () => viewLogEntry(parseInt(item.dataset.logIndex)));
         item.addEventListener("keydown", e => {
             if (e.key === "Enter") viewLogEntry(parseInt(item.dataset.logIndex));
         });
     });
 
-    log.forEach((e, i) => {
-        const img = list.querySelector(`img[data-idx="${i}"]`);
-        if (!img) return;
-        const fish_like = { imgs: e.imgs || [], svgColor: e.svgColor, svgAccent: e.svgAccent, name: e.name, id: e.fishId };
-        loadFishImage(fish_like, img);
+    // Load images for each group card
+    let img_group_index = 0;
+    Object.values(groups).forEach(group => {
+        const img = list.querySelector(`img[data-group-img="${img_group_index}"]`);
+        if (img) loadFishImage(group.fish_like, img);
+        img_group_index++;
     });
 
     updateXPDisplay();
