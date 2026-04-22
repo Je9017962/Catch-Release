@@ -14,10 +14,10 @@ Catch & Release is a browser-based WebAR app — no app store download required.
 2. **Read the onboarding**, shown once on first login, to learn the controls and safety tips.
 3. **Tap the fishing pin** on the Lake Eola map to open the AR camera.
 4. **Tap anywhere on the water** to cast your line and watch the arc fly out from the rod tip.
-5. **Wait for a bite** — the bobber will dip and the REEL button will appear.
+5. **Wait for a bite** the bobber will dip and the REEL button will appear.
 6. **Tap REEL** before the fish escapes. You have about four seconds.
 7. **Learn about your catch** by viewing the fish detail card, which includes the scientific name, size, conservation status, and why the fish should be released.
-8. **Release or keep** — releasing awards bonus XP.
+8. **Release or keep** releasing awards bonus XP.
 9. **Check your profile** to track your catches, XP, and rank progression.
 
 ## Features
@@ -25,7 +25,7 @@ Catch & Release is a browser-based WebAR app — no app store download required.
 ### AR Fishing Scene
 - Live rear camera feed with a translucent animated water overlay
 - Drawn fishing rod with taper, reel, and guide rings always visible on screen
-- Smooth cast arc animation — the line flies from the rod tip to your tap point
+- Smooth cast arc animation, the line flies from the rod tip to your tap point
 - Animated bobber with water ripple rings and a frantic dip and glow when a fish bites
 - Six species-accurate fish swimming in the water before you cast (Largemouth Bass, Bluegill, Black Crappie, Florida Gar, and more), each with species-specific anatomy and a body wag animation
 - Full animated lake fallback scene including sky, sun, clouds, treeline, hills, dock, and water ripples if camera permission is denied
