@@ -1,6 +1,6 @@
 # Catch & Release AR
 
-An augmented reality fishing experience set at **Lake Eola, Orlando, Florida**. Point your phone camera at the water, cast your line, reel in real Lake Eola fish species, and learn why each one should be released back into the wild.
+An augmented reality fishing experience set at Lake Eola, Orlando, Florida. Point your phone camera at the water, cast your line, reel in real Lake Eola fish species, and learn why each one should be released back into the wild.
 
 **Live demo:** [catchrelease.netlify.app](https://catchrelease.netlify.app)
 
@@ -18,10 +18,10 @@ Catch & Release is a browser-based WebAR app that requires no app store download
 2. **Read the onboarding**, shown once on first login, to learn the controls and safety tips.
 3. **Tap the fishing pin** on the Lake Eola map to open the AR camera.
 4. **Tap anywhere on the water** to cast your line and watch the arc fly out from the rod tip.
-5. **Wait for a bite** — the bobber will dip and the REEL button will appear.
+5. **Wait for a bite** the bobber will dip and the REEL button will appear.
 6. **Tap REEL** before the fish escapes. You have about four seconds.
 7. **Learn about your catch** by viewing the fish detail card, which shows the scientific name, size, conservation status, and why the fish should be released.
-8. **Release or keep** — releasing awards 25% bonus XP.
+8. **Release or keep** releasing awards 25% bonus XP.
 9. **Check your profile** to track your catches, XP total, and rank progression.
 
 ---
@@ -31,7 +31,7 @@ Catch & Release is a browser-based WebAR app that requires no app store download
 ### AR Fishing Scene
 - Live rear camera feed with a translucent animated water overlay
 - Drawn fishing rod with taper, reel, and guide rings always visible on screen
-- Smooth cast arc animation — the line flies from the rod tip to your tap point
+- Smooth cast arc animation, the line flies from the rod tip to your tap point
 - Animated bobber with water ripple rings and a frantic dip and glow when a fish bites
 - Six species-accurate fish swimming in the water before you cast (Largemouth Bass, Bluegill, Black Crappie, Florida Gar, and more), each with species-specific anatomy and a body wag animation
 - Full animated lake fallback scene including sky, clouds, treeline, hills, dock, and water ripples if camera permission is denied
@@ -57,9 +57,9 @@ Each fish card shows a real photo (with SVG fallback), scientific name, average 
 - Data is saved automatically every 30 seconds and when the tab loses focus
 
 ### Weather
-- Live weather fetched from [Open-Meteo](https://open-meteo.com) — free with no API key required
+- Live weather fetched from [Open-Meteo](https://open-meteo.com) free with no API key required
 - GPS location via the browser Geolocation API
-- Reverse geocoding via BigDataCloud — free with no API key required
+- Reverse geocoding via BigDataCloud, free with no API key required
 - Displays the real date, temperature in Fahrenheit, weather condition, and city name on the map and AR screens
 - Falls back to Lake Eola, Orlando if location access is denied
 
