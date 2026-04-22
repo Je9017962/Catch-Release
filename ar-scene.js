@@ -1,4 +1,3 @@
-// Jeremiah Morris-Wyley
 // ar-scene.js — AR fishing scene: phone camera + canvas overlay.
 // Features:
 //   • Rich animated lake fallback (parallax sky, hills, trees, dock, water)
