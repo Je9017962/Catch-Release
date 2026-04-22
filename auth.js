@@ -1,4 +1,3 @@
-// Jeremiah Morris-Wyley
 // auth.js — Secure local auth with SHA-256, button loading states, session management
 
 async function hashPassword(password) {
