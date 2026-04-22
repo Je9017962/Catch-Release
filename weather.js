@@ -1,4 +1,4 @@
-// Jeremiah Morris-Wyley
+
 // weather.js — Live GPS + Open-Meteo weather (free, no API key)
 
 const WMO = {
